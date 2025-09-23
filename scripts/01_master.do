@@ -109,7 +109,7 @@ ssc install fre, replace
 * 1. VARIABLES AND DATABASES CONSTRUCTION
 * a. Identifying CGIAR-related innovations
 
-do "${do}${slash}2_Community_CG_innovations"    // Using new ESS4 data // SIHS NOTE: error in this line (see comment below)
+do "${do}${slash}02_Community_CG_innovations"    // Using new ESS4 data // SIHS NOTE: error in this line (see comment below)
 	* SIHS NOTE: the line above calls on the datafile 2_Community_CG_innovations. 
 	* This file references the non-existant folder "Data_new"...
 	* I believe the folder referenced should be "Data"
@@ -118,14 +118,14 @@ do "${do}${slash}2_Community_CG_innovations"    // Using new ESS4 data // SIHS N
 	* I copied the folder Data in 2_raw_data > ESS4_2018-19 and renamed the copy "Data_new"
 
 	
-do "${do}${slash}3_PP_CG_innovation_ess4"       // POST-PLANTING survey - ESS4 (new data)
+do "${do}${slash}03_PP_CG_innovation_ess4"       // POST-PLANTING survey - ESS4 (new data)
 
 
-do "${do}${slash}4_PP_CG_innovation_ess3"       // POST-PLANTING survey - ESS3 
+do "${do}${slash}04_PP_CG_innovation_ess3"       // POST-PLANTING survey - ESS3 
 
-do "${do}${slash}5_psnp"                        // PSNP program 
+do "${do}${slash}05_psnp"                        // PSNP program 
 
-do "${do}${slash}6_DNA_ess4"                    // Crop germplasm improvement using DNA- fingerprinting data   
+do "${do}${slash}06_DNA_ess4"                    // Crop germplasm improvement using DNA- fingerprinting data   
 	* SIHS NOTE: file name reference problem in 6_DNA_ess4.do: 
 		* 6_DNA_ess4.do calls upon sect9a_ph_w4.dta. 
 		* This file does not exist in the file path 
@@ -139,12 +139,12 @@ do "${do}${slash}6_DNA_ess4"                    // Crop germplasm improvement us
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *2. TABLES - NATIONAL AND REGIONAL ADOPTION RATES
-do "${do}${slash}7_National and regional adoption rates_ess3" 
+do "${do}${slash}07_National and regional adoption rates_ess3" 
 
-do "${do}${slash}8_National and regional adoption rates_ess4"   
+do "${do}${slash}08_National and regional adoption rates_ess4"   
  
-do "${do}${slash}8a_National and regional urban livestock adoption rates_ess4"                  
-do "${do}${slash}9_Misclassification_new"										
+do "${do}${slash}08a_National and regional urban livestock adoption rates_ess4"                  
+do "${do}${slash}09_Misclassification_new"										
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
