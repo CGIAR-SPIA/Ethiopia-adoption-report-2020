@@ -62,10 +62,9 @@ Output files: -  Adopters characteristics.xml
 * 0. PRELIMINARIES
 
 * a. General Directories
-*global drive     "C:\Users\Marcelo\Desktop\ETH_report\replication_files" // original drive
-// global dir "/Users/sisalzer/Library/CloudStorage/Box-Box/SPIA/Country Studies/Country Studies - Ethiopia v1/replication_files" // sihs computer lab dir
-// global dir "/Users/sophiasalzer/Library/CloudStorage/Box-Box/SPIA/Country Studies/Country Studies - Ethiopia v1/replication_files" // sihs laptop dir
-global dir "" // GitHub dir
+
+cd ".." // change the parent directory (Ethiopia-adoption-report-2020)
+global dir "`c(pwd)'" // set directory global, "dir"
 
 * b. automatic slash detection - adedd by SIHS, 7/16/2025
 
@@ -76,23 +75,32 @@ else {
     global slash "/"
 }
 
-adopath +        "${dir}${slash}1_ado" 											
-global do        "$dir${slash}1_do_files"
-global rawdata   "$dir${slash}2_raw_data"
-global data      "$dir${slash}3_report_data" 
-global table     "$dir${slash}4_table"
+* c. define globals to sub folders
 
-* c. Raw data 
-global raw1    "${rawdata}${slash}ESS1_2011-12${slash}Data${slash}STATA"
-global raw2    "${rawdata}${slash}ESS2_2013-14${slash}Data${slash}STATA"
-global raw3    "${rawdata}${slash}ESS3_2015-16${slash}Data${slash}STATA"
-global raw3b   "${rawdata}${slash}ESS3_2015-16${slash}Data${slash}"
-global raw4    "${rawdata}${slash}ESS4_2018-19${slash}Data"
-global raw4b   "${rawdata}${slash}ESS4_2018-19"
-global raw4new "${rawdata}${slash}ESS4_2018-19${slash}Data_new"
+* stata: ado and do files
+adopath + "${dir}${slash}ado"				// contains ado files
+global do "${dir}${slash}scripts"			// conains scripts (.do and .R)
+* data: main and sub directories
+global bigdata "${dir}${slash}data"			// contains data subfolders
+global rawdata "${bigdata}${slash}raw_data"	// contains raw data subfolder
+global data "${bigdata}${slash}report_data"	// contains report data subfolder
+
+* subfolders in raw data subfolder 
+global raw3    "${rawdata}${slash}ESS3_2015-16${slash}Data${slash}STATA" 
+global raw4    "${rawdata}${slash}ESS4_2018-19${slash}Data" 
+global raw4new "${rawdata}${slash}ESS4_2018-19${slash}Data_new" 
 global temp    "${rawdata}${slash}temp" 
 
-* d. Covariates Raw Data
+* obsolete sbufolders in raw data subfolder: 
+// global raw1    "${rawdata}${slash}ESS1_2011-12${slash}Data${slash}STATA" 
+// global raw2    "${rawdata}${slash}ESS2_2013-14${slash}Data${slash}STATA" 
+// global raw3b   "${rawdata}${slash}ESS3_2015-16${slash}Data${slash}" 
+// global raw4b   "${rawdata}${slash}ESS4_2018-19" 
+
+* results folder
+global table "${dir}${slash}tables"	// save tables here
+	
+* d. covariates (in raw data subfolder)
 global cov3plot "${rawdata}${slash}Covariates${slash}HH_ AND_PLOT_2015${slash}Plot_level_data_2015"
 global cov3hh   "${rawdata}${slash}Covariates${slash}HH_ AND_PLOT_2015${slash}HH_level_data_2015"
 global cov3com  "${rawdata}${slash}Covariates${slash}community_and do file${slash}Community_level_data_2015"
@@ -100,7 +108,7 @@ global cov4plot "${rawdata}${slash}Covariates${slash}plot_hh_level_2018${slash}P
 global cov4hh   "${rawdata}${slash}Covariates${slash}plot_hh_level_2018${slash}HH_level_data_2018"
 global cov4com  "${rawdata}${slash}Covariates${slash}community and do file_2018${slash}Community_level_data_2018"
 
-* d. Installation of packages, sihs added
+* e. installation of packages, sihs added
 ssc install xml_tab, replace
 ssc install winsor2, replace
 ssc install fre, replace
