@@ -4,10 +4,14 @@ Welcome to this repository, which contains the replication files for **[Shining 
 This repository provides the code and supporting data needed to reproduce the tables and figures in the Ethiopia synthesis report.  
 
 The repo includes:
+
 - `data/`
+  
 - `scripts/`
-- `outputs/`
+
 
 | Script File | Tables Generated | Figures Generated |
 |:------------|:----------------:|:-----------------:|
 | `Tabs.R`    | 10, 11, 12       | 4, 9              |
+
+- `outputs/`
