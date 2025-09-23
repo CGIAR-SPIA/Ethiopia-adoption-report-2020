@@ -63,8 +63,9 @@ Output files: -  Adopters characteristics.xml
 
 * a. General Directories
 *global drive     "C:\Users\Marcelo\Desktop\ETH_report\replication_files" // original drive
-// global dir "/Users/sisalzer/Library/CloudStorage/Box-Box/SPIA/Country Studies/Country Studies - Ethiopia v1/replication_files" // computer lab dir
-global dir "/Users/sophiasalzer/Library/CloudStorage/Box-Box/SPIA/Country Studies/Country Studies - Ethiopia v1/replication_files" // laptop dir
+// global dir "/Users/sisalzer/Library/CloudStorage/Box-Box/SPIA/Country Studies/Country Studies - Ethiopia v1/replication_files" // sihs computer lab dir
+// global dir "/Users/sophiasalzer/Library/CloudStorage/Box-Box/SPIA/Country Studies/Country Studies - Ethiopia v1/replication_files" // sihs laptop dir
+global dir "" // GitHub dir
 
 * b. automatic slash detection - adedd by SIHS, 7/16/2025
 
@@ -158,12 +159,9 @@ do "${do}${slash}ESS_2015_Dofile_public"
 		* missing package installs
 			* `fre` and `winsor2` called on, but these are not (or are no longer?) part of base stata pkg
 		* added installations for `fre` and `winsor2` to master.do (this file) in installations section
-		* 
+		
 		
 do "${do}${slash}ESS4_2018_dofile__Public" 
-	* sihs notes:
-		* 
-
 
 do "${do}${slash}10_Covariates_ess3"  
 	* sihs notes
