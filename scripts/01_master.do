@@ -121,7 +121,6 @@ do "${do}${slash}02_Community_CG_innovations"    // Using new ESS4 data // SIHS 
 	
 do "${do}${slash}03_PP_CG_innovation_ess4"       // POST-PLANTING survey - ESS4 (new data)
 
-
 do "${do}${slash}04_PP_CG_innovation_ess3"       // POST-PLANTING survey - ESS3 
 
 do "${do}${slash}05_psnp"                        // PSNP program 
@@ -144,7 +143,8 @@ do "${do}${slash}07_National and regional adoption rates_ess3"
 
 do "${do}${slash}08_National and regional adoption rates_ess4"   
  
-do "${do}${slash}08a_National and regional urban livestock adoption rates_ess4"                  
+do "${do}${slash}08a_National and regional urban livestock adoption rates_ess4" 
+
 do "${do}${slash}09_Misclassification_new"										
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -159,7 +159,6 @@ do "${do}${slash}ESS_2015_dofile_public"
 		* missing package installs
 			* `fre` and `winsor2` called on, but these are not (or are no longer?) part of base stata pkg
 		* added installations for `fre` and `winsor2` to master.do (this file) in installations section
-		
 		
 do "${do}${slash}ESS4_2018_dofile_public" 
 
@@ -179,7 +178,9 @@ do "${do}${slash}11_Covariates_ess4"
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * 4. TABLES CHARACTERISTICS OF HOUSEHOLD, PLOT AND EA LEVEL COVARIATES 
+
 do "${do}${slash}12_Tables_hh_plot_ea_characteristics_ess3"
+
 do "${do}${slash}13_Tables_hh_plot_ea_characteristics_ess4"
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -194,7 +195,8 @@ do "${do}${slash}15_Who are the adopters of the innovations_ESS3"
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * 6. TABLES - SYNERGIES BETWEEN INNOVATIONS
-do "${do}${slash}16_Synergies"                                                        
+do "${do}${slash}16_Synergies"
+
 do "${do}${slash}17_Synergies_DNA"														
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
