@@ -100,7 +100,7 @@ global cov4plot "${rawdata}${slash}Covariates${slash}plot_hh_level_2018${slash}P
 global cov4hh   "${rawdata}${slash}Covariates${slash}plot_hh_level_2018${slash}HH_level_data_2018"
 global cov4com  "${rawdata}${slash}Covariates${slash}community and do file_2018${slash}Community_level_data_2018"
 
-* d. Installation of packages
+* d. Installation of packages, sihs added
 ssc install xml_tab, replace
 ssc install winsor2, replace
 ssc install fre, replace
