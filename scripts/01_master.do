@@ -151,7 +151,7 @@ do "${do}${slash}09_Misclassification_new"
 
 * 3. COVARIATES CONSTRUCTION AND MERGING
 * a. Covariates construction
-do "${do}${slash}ESS_2015_Dofile_public"
+do "${do}${slash}ESS_2015_dofile_public"
 	* sihs notes
 		* obsolete command `c()` 
 			* `c()` i.e. `contents()` called on, but not available for stata 17+:
@@ -161,7 +161,7 @@ do "${do}${slash}ESS_2015_Dofile_public"
 		* added installations for `fre` and `winsor2` to master.do (this file) in installations section
 		
 		
-do "${do}${slash}ESS4_2018_dofile__Public" 
+do "${do}${slash}ESS4_2018_dofile_public" 
 
 do "${do}${slash}10_Covariates_ess3"  
 	* sihs notes
