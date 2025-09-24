@@ -1,8 +1,12 @@
 # Ethiopia-adoption-report-2020
 Welcome to this repository, which contains the replication files for **[Shining a Brighter Light: Evidence on Adoption and Diffusion of CGIAR-Related Innovations in Ethiopia](https://iaes.cgiar.org/spia/publications/shining-brighter-light-comprehensive-evidence-adoption-and-diffusion-cgiar)** (SPIA Synthesis Report, October 2020)by Frederic Kosmowski, Solomon Alemu, Paola Mallia, James Stevenson, and Karen Macours.
 
-Using data from the Ethiopian Socioeconomic Survey (ESS), the research documents adoption patterns across 19 innovations.
-This repository provides the code and supporting data needed to reproduce the tables and figures in the Ethiopia synthesis report.  The report is based on data from.........collected by the
+This repository provides the code and supporting data needed to reproduce the tables and figures in the Ethiopia synthesis report. Using data from the Ethiopian Socioeconomic Survey (ESS), the research documents adoption patterns across 19 innovations spanning:
+
+- **Animal agriculture** (crossbred livestock, artificial insemination, improved forages)
+- **Crop germplasm improvement** (improved varieties identified through DNA fingerprinting and visual aids)
+- **Natural resource management** (soil conservation, irrigation, conservation agriculture)
+- **Policy influences** (safety net programs, water user associations)
 
 # Getting Started
 ## Prerequisites
@@ -13,6 +17,7 @@ This repository provides the code and supporting data needed to reproduce the ta
 
 The repo includes the following folders:
 
+```
 ethiopia-adoption-report-2020/
 ├── data/
 │   ├── raw_data/          # Original ESS survey data  ????
@@ -31,7 +36,7 @@ ethiopia-adoption-report-2020/
 │   ├── questionnaires/  # ESS survey instruments ??? 
 │   └── methodology/    # Technical notes
 └── README.md`
-
+```
 Script Organization
 
 | Script File | Purpose | Tables Generated | Figures Generated |
@@ -42,9 +47,9 @@ Script Organization
 
 ### Dependencies
 
-**Stata scripts**: follows a modular analysis pipeline structure with a master script  `1_master.do` - this executes the entire pipeline and generates all Stata outputs.If running specific components, run individual scripts in order specified.
-**R scripts**:  run independently
-- `outputs/`
+- **Stata scripts**: follows a modular analysis pipeline structure with a master script  `1_master.do` - this executes the entire pipeline and generates all Stata outputs.If running specific components, run individual scripts in order specified.
+- **R scripts**:  run independently
+
 
 # Survey Coverage
 
