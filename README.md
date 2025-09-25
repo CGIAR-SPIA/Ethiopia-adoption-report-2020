@@ -1,5 +1,5 @@
 # Ethiopia-adoption-report-2020
-Welcome to this repository, which contains the replication files for **[Shining a Brighter Light: Evidence on Adoption and Diffusion of CGIAR-Related Innovations in Ethiopia](https://iaes.cgiar.org/spia/publications/shining-brighter-light-comprehensive-evidence-adoption-and-diffusion-cgiar)** (SPIA Synthesis Report, October 2020) by Frederic Kosmowski, Solomon Alemu, Paola Mallia, James Stevenson, and Karen Macours.
+Welcome to this repository, which contains the replication files for **[Shining a Brighter Light: Comprehensive Evidence on Adoption and Diffusion of CGIAR-Related Innovations in Ethiopia](https://iaes.cgiar.org/spia/publications/shining-brighter-light-comprehensive-evidence-adoption-and-diffusion-cgiar)** (SPIA Synthesis Report, October 2020) by Frederic Kosmowski, Solomon Alemu, Paola Mallia, James Stevenson, and Karen Macours.
 
 This repository provides the code and supporting data needed to reproduce the tables and figures in the Ethiopia synthesis report. Using data from the Ethiopian Socioeconomic Survey (ESS), the research documents adoption patterns across 19 innovations spanning:
 
