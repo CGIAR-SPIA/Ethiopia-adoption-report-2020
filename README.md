@@ -11,8 +11,8 @@ This repository provides the code and supporting data needed to reproduce the ta
 # Getting Started
 ## Prerequisites
 
-- Stata 15+ (for main analysis)
-- R 4.0+ with packages: , ggplot2, dplyr
+- Stata 15+ with required dependencies 
+- R 4.0+ with required packages
 
 
 The repo includes the following folders:
@@ -40,7 +40,7 @@ Script Organization
 
 | Script File | Purpose | Tables Generated | Figures Generated |
 |:------------|:--------|:----------------:|:-----------------:|
-| `1_master.do` |runs all Stata analysis scripts in the correct order | All Stata tables | - |
+| `1_master.do` |runs all Stata analysis scripts in the correct order | Tables 2, 9, 13-16, 17-20, 22, 28-41 | - |
 | `Tabs.R` | DNA fingerprinting analysis | 10, 11, 12 | 4, 9 |
 | `Location_Matching.R` | Spatial analysis & mapping | 31, 32 | 5, 6, 7, 8 |
 
@@ -48,6 +48,7 @@ Script Organization
 
 - **Stata scripts**: follows a modular analysis pipeline structure with a master script  `1_master.do` - this executes the entire pipeline and generates all Stata outputs. If running specific components, run individual scripts in order specified.
 - **R scripts**:  run independently
+- Tables 1, 4-8, 21, 23-27 come from external sources (stocktaking document, questionnaires, variety registries)
 
 
 # Survey Coverage
@@ -65,9 +66,10 @@ Panel on Impact Assessment (SPIA).
 
 # Contact & Support
 
-- Primary Contact: Standing Panel on Impact Assessment (SPIA) Fredric ??
-- Technical Issues/Repository Issues: Sophia/Milcah??
-- Data Questions: Refer to original ESS documentation??
+- Primary Contact: SPIA (spia@cgiar.org) / Fredric ??
+- Technical Issues/Repository Issues: Sophia/& Milcah??
+- Data Questions: World Bank LSMS team or Ethiopian Central Statistical Agency ?? Refer to original ESS documentation??
+- 
 
 # Funding Acknowledgments
 
