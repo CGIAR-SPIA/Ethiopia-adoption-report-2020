@@ -10,7 +10,7 @@ rm(list = ls())
 
 # Install and load required packages
 required_packages <- c("readstata13", "haven", "dplyr", "ggthemes", "scales", 
-                       "ggplot2", "gridExtra", "grid")
+                       "ggplot2", "gridExtra", "writexl", "grid")
 
 for (pkg in required_packages) {
   if (!require(pkg, character.only = TRUE)) {
@@ -92,6 +92,9 @@ table10 <- data.frame(
 # Print Table 10
 print(table10)
 
+# Save as Excel files
+write_xlsx(table10, path = file.path("outputs", "tables", "Table10_Barley.xlsx"))
+
 # ===============================================================================
 # TABLE 11:  Distribution of maize by variety planted during the 2018/19 growing season ----
 # ===============================================================================
@@ -150,6 +153,7 @@ table11 <- data.frame(
 
 # Print Table 11
 print(table11)
+write_xlsx(table11, path = file.path("outputs", "tables", "Table11_Maize.xlsx"))
 
 # ===============================================================================
 # TABLE 12: Distribution of sorghum by variety planted during the 2018/19 growing season
@@ -196,7 +200,7 @@ table12 <- data.frame(
 
 # Print Table 12
 print(table12)
-
+write_xlsx(table12, path = file.path("outputs", "tables", "Table12_Sorghum.xlsx"))
 # ===============================================================================
 #  Figure 4: Adoption estimates for conservation agriculture (CA)
 # ===============================================================================
@@ -272,6 +276,16 @@ combined_plot <- grid.arrange(
   ncol = 1
 )
 
+# Define your title
+fig_title <- "Figure 4"
+
+# Save using the cleaned title
+ggsave(
+  filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
+  plot = combined_plot,
+  width = 8, height = 6, dpi = 300
+)
+
 # ===============================================================================
 # Figure 9: Number of rural households adopting each CGIAR-related innovation in Ethiopia in 2019
 # ===============================================================================
@@ -295,6 +309,16 @@ figure9 <- ggplot(data = Abs_data, aes(reorder(Innovation, N2), y = N2)) +
   )
 
 print(figure9)
+
+# Define your title
+fig_title <- "figure9"
+
+# Save using the cleaned title
+ggsave(
+  filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
+  plot = figure9,
+  width = 8, height = 6, dpi = 300
+)
 
 # ===============================================================================
 # End of Script
