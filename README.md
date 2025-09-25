@@ -3,10 +3,10 @@ Welcome to this repository, which contains the replication files for **[Shining 
 
 This repository provides the code and supporting data needed to reproduce the tables and figures in the Ethiopia synthesis report. Using data from the Ethiopian Socioeconomic Survey (ESS), the research documents adoption patterns across 19 innovations spanning:
 
-- **Animal agriculture** (crossbred livestock, artificial insemination, improved forages)
-- **Crop germplasm improvement** (improved varieties identified through DNA fingerprinting and visual aids)
-- **Natural resource management** (soil conservation, irrigation, conservation agriculture)
-- **Policy influences** (safety net programs, water user associations)
+- **Animal agriculture** 
+- **Crop germplasm improvement** 
+- **Natural resource management** 
+- **Policies and markets interventions**
 
 # Getting Started
 ## Prerequisites
