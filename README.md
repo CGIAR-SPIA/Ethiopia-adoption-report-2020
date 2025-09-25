@@ -65,9 +65,9 @@ Panel on Impact Assessment (SPIA).
 
 # Contact & Support
 
-Primary Contact: Standing Panel on Impact Assessment (SPIA) Fredric ??
-Technical Issues/Repository Issues: Sophia/Milcah??
-Data Questions: Refer to original ESS documentation??
+- Primary Contact: Standing Panel on Impact Assessment (SPIA) Fredric ??
+- Technical Issues/Repository Issues: Sophia/Milcah??
+- Data Questions: Refer to original ESS documentation??
 
 # Funding Acknowledgments
 
