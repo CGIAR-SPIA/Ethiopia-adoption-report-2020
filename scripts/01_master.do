@@ -63,7 +63,8 @@ set more off
 
 * a. General Directories
 
-cd ".." // change the parent directory (Ethiopia-adoption-report-2020)
+cd "/Users/sophiasalzer/Documents/Ethiopia-adoption-report-2020" // change the parent directory (Ethiopia-adoption-report-2020)
+// if on github: cd ".." // cd up one level (i.e. Ethiopia-adoption-report-2020 <- scripts)
 global dir "`c(pwd)'" // set directory global, "dir"
 
 * b. automatic slash detection - adedd by SIHS, 7/16/2025
