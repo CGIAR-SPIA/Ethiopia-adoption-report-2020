@@ -63,8 +63,9 @@ set more off
 
 * a. General Directories
 
-cd "/Users/sophiasalzer/Documents/Ethiopia-adoption-report-2020" // change the parent directory (Ethiopia-adoption-report-2020)
-// if on github: cd ".." // cd up one level (i.e. Ethiopia-adoption-report-2020 <- scripts)
+cd "/Users/sophiasalzer/Documents/Ethiopia-adoption-report-2020" // parent directory
+// if in "scripts": cd ".." // cd up one level (i.e. Ethiopia-adoption-report-2020 <- scripts)
+
 global dir "`c(pwd)'" // set directory global, "dir"
 
 * b. automatic slash detection - adedd by SIHS, 7/16/2025
@@ -92,7 +93,7 @@ global raw4    "${rawdata}${slash}ESS4_2018-19${slash}Data"
 global raw4new "${rawdata}${slash}ESS4_2018-19${slash}Data_new" 
 global temp    "${rawdata}${slash}temp" 
 
-* obsolete sbufolders in raw data subfolder: 
+* obsolete subfolders in raw data subfolder: 
 // global raw1    "${rawdata}${slash}ESS1_2011-12${slash}Data${slash}STATA" 
 // global raw2    "${rawdata}${slash}ESS2_2013-14${slash}Data${slash}STATA" 
 // global raw3b   "${rawdata}${slash}ESS3_2015-16${slash}Data${slash}" 
