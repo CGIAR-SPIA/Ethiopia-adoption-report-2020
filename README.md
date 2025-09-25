@@ -31,7 +31,6 @@ ethiopia-adoption-report-2020/
 ├── outputs/
 │   ├── tables/          # Generated tables (Excel format)
 │   ├── figures/         # Maps and visualizations
-│   └── supplementary/   # Additional analytical outputs
 ├── documentation/          **any of this that we need to include** 
 │   ├── questionnaires/  # ESS survey instruments ??? 
 │   └── methodology/    # Technical notes
