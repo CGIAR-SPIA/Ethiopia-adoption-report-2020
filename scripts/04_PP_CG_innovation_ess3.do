@@ -35,10 +35,6 @@ save "${rawdata}${slash}Auxiliary_data${slash}ESS3_ET_local_area_unit_conversion
 ******************************************************************************** 
 use "${raw3}${slash}sect_cover_pp_w3", clear
 count
-//  3,830 - 3722 hhs - unique id: holder_id household_id2
-// Rural hh:             3235
-// Small town hh:         417
-// Med and large town hh:  70
 
 * Total No. of HH per EA
 egen hh_ea=count(household_id2), by(ea_id)
@@ -155,7 +151,7 @@ save "${data}${slash}w3_sect2_pp_parcel", replace
 ********************************************************************************
 *** PP_Sec.3 - NRM - 
 ********************************************************************************
-*use "${raw3}${slash}PP_w3S3", clear
+
 use "${raw3}${slash}sect3_pp_w3", clear
 
 
@@ -407,8 +403,6 @@ replace plotarea_sr=(pp_s3q02_a*69.28191)/10000 if pp_s3q02_c==8 //medeb
 *replace plotarea_sr=pp_s3q02_a if pp_s3q02_c==9 //rope
 replace plotarea_sr=(pp_s3q02_a*6176.3808)/10000 if pp_s3q02_c==10 //ermija
 
-
-*non missing: 24,047 obs - 16,844 of cultivated plots (total cultivated plots 23,244)
 lab var plotarea_sr "Plot area in HA - Self-reported"
 * Compass and rope
 g       plotarea_cr=.
@@ -1291,26 +1285,12 @@ save `pp_w3s4'
 use "${raw3}${slash}sect8_1_ls_w3", clear
 
 merge m:1 household_id2 ls_sec_8_type_code holder_id using "${raw3}${slash}sect8_3_ls_w3"
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                             0
-    matched                            88,090  (_merge==3)
-    -----------------------------------------
-*/
+
 drop _merge
 
 
 merge m:1 household_id2 ls_sec_8_type_code holder_id using "${raw3}${slash}sect8_4_ls_w3"
-/* 
 
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                             0
-    matched                            88,090  (_merge==3)
-    -----------------------------------------
-*/
 drop _merge
 
 
@@ -1652,57 +1632,16 @@ save `PP_W3S81'
 use `w3_coverPP', clear
 
 merge 1:1 household_id2 using `PP_W3S3'
-
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                            79
-        from master                        79  (_merge==1)
-        from using                          0  (_merge==2)
-
-    matched                             3,643  (_merge==3)
-    -----------------------------------------
-*/
 drop _merge
 
 merge 1:1 household_id2 using `PP_W3S81'
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                             0
-    matched                             3,722  (_merge==3)
-    -----------------------------------------
-
-*/
 drop _merge
 
 merge 1:1 household_id2 using `pp_w3s4'
-/*
-  Result                           # of obs.
-    -----------------------------------------
-    not matched                           654
-        from master                       654  (_merge==1)
-        from using                          0  (_merge==2)
-
-    matched                             3,068  (_merge==3)
-    -----------------------------------------
-
-*/
 drop _m 
 
 
 merge 1:1 household_id2 using "${raw3}${slash}sect_cover_hh_w3.dta"
-
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         1,286
-        from master                        27  (_merge==1)
-        from using                      1,259  (_merge==2)
-
-    matched                             3,695  (_merge==3)
-    -----------------------------------------
-*/
 drop if _m==2
 drop _m
 
@@ -2149,32 +2088,9 @@ save "${data}${slash}ess3_pp_ea", replace
 use "${data}${slash}ess3_pp_cropvar_plot", clear
 
 merge 1:1 holder_id household_id2 parcel_id field_id using  "${data}${slash}ess3_pp_nrm_plot"
-
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                x        10,296
-        from master                         0  (_merge==1)
-        from using                     10,296  (_merge==2)
-
-    matched                            23,009  (_merge==3)
-    -----------------------------------------
-*/
 drop _m 
  
 merge m:1 holder_id household_id2 parcel_id using "${data}${slash}w3_sect2_pp_parcel"
-
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         3,363
-        from master                       214  (_merge==1)
-        from using                      3,149  (_merge==2)
-
-    matched                            33,091  (_merge==3)
-    -----------------------------------------
-*/
 drop if _m==2
 drop _merge
 

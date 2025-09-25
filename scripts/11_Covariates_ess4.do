@@ -177,10 +177,8 @@ lab var hhd_flab "Share of female family labor >50%"
 
 tempfile  hhfamlab1
 save     `hhfamlab1'
-*ex // sihs note below:
-	* why is this comment here? 
-	* auhtor's comment left in
-	* `ex` is not a stata command as far as I can tell
+
+
 ****************************************
 * FEMALE LIVESTOCK OWNERS AND MANAGERS *
 ****************************************
@@ -263,7 +261,7 @@ rename  mainoc_head2 agr_head
 lab var agr_head      "HH-head main occupation is agriculture"
 *lab var adulteq  "HH size in adult equivalent" // sihs note below:
 	* author commented out this line. why?
-	* no .abel for HH size in adult equivalent?
+	* no label for HH size in adult equivalent?
 rename  asset_index asset_quint
 lab var asset_quint   "Asset index - quintiles"
 rename  asset asset_index
@@ -359,19 +357,6 @@ replace hhd_feed=0 if hhd_elepgrass==0 & hhd_gaya==0 & hhd_sasbaniya==0 & hhd_al
 replace hhd_feed=100 if hhd_elepgrass==100 | hhd_gaya==100 | hhd_sasbaniya==100 | hhd_alfa==100
 
 merge 1:1 household_id using "${data}${slash}ess4_dna_hh_new" 
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         1,989
-        from master                     1,988  (_merge==1)
-        from using                          1  (_merge==2)
-
-    matched                               787  (_merge==3)
-    -----------------------------------------
-*/
-
-* sihs note about table above: number of obs matched / not matched no longer aligns with stata output
 
 
 drop if _m==2
@@ -411,18 +396,6 @@ lab var s4q06          "Incidence of herbicide use"
 lab var s4q07          "Incidence of fungicide use"
 
 merge 1:1  household_id parcel_id field_id using  "${data}${slash}w4_plotlevel_pp_new"
-/*
-Result                           # of obs.
-    -----------------------------------------
-    not matched                         6,484
-        from master                         0  (_merge==1)
-        from using                      6,484  (_merge==2)
-
-    matched                            13,372  (_merge==3)
-    -----------------------------------------
-*/
-
-* sihs note about table above: number of obs matched / not matched no longer aligns with stata output
 
 
 drop if _m==1
@@ -501,6 +474,7 @@ lab var cs4q03               "Vehicles pass on the main road throughout the year
 
 
 *lab var dist_roadmedi2015    "HH distance to nearest major road (GPS) -median values"
+	* sihs note: no label for dist_roadmedi2015 ?
 lab var cs4q08               "Community is a woreda town"                                //bin
 lab var cs4q09               "Distance to the nearest Woreda/town (KM)"
 lab var cs4q09_wiz           "Distance to the nearest Woreda/town (KM) - winsorized"
@@ -530,58 +504,17 @@ rename ead_cross_poultry  ead_crpo
 
 *Merging with info on PSNP created in do: 5_psnp
 merge 1:1 ea_id using "${data}${slash}ess4_ea_psnp"
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                           282
-        from master                         0  (_merge==1)
-        from using                        282  (_merge==2)
-
-    matched                               253  (_merge==3)
-    -----------------------------------------
-*/
-
-* sihs note about table above: number of obs matched / not matched no longer aligns with stata output
-
 
 keep if _m==3
 drop _m
 
 * Merging with Locations and Distances of CG activities
 merge 1:1 ea_id using  "${data}${slash}dashboard_locations"
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                            26
-        from master                        15  (_merge==1)
-        from using                         11  (_merge==2)
-
-    matched                               238  (_merge==3)
-    -----------------------------------------
-*/
-
-* sihs note about table above: number of obs matched / not matched no longer aligns with stata output
-
-
 
 drop if _m==2
 drop _m
 * Merging with DNA data created in do: 9_Crop varietal identification"
 merge 1:1 ea_id using "${data}${slash}ess4_dna_ea_new"                         
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                            96
-        from master                        93  (_merge==1)
-        from using                          3  (_merge==2)
-
-    matched                               160  (_merge==3)
-    -----------------------------------------
-*/
-
-* sihs note about table above: number of obs matched / not matched no longer aligns with stata output
-
 
 drop if _m==2
 drop _merge
@@ -709,6 +642,3 @@ lab var d150_Sorghum   "Distance < 150 Km to CG activity -Improved sorghum varie
  
 
 save "${data}${slash}ess4_pp_cov_ea_new", replace
-// ex // sihs commented out this line:
-	* ex is not a valid stata command
-	* idk what this is meant to be tbh, maybe "exit"

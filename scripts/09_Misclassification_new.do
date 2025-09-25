@@ -92,10 +92,6 @@ local rname `"  `rname'   "`lbl'" " " "'
 
 mat C= BN
 
-// foreach var in $var1 { // sihs added
-//     count if missing(`var') & wave==4 // sihs added
-// } // sihs added
-
 xml_tab BN,  save("$table${slash}ESS4_MisclassificationNEW.xml") replace sheet("Table 1", nogridlines)  ///
 rnames(`rname' "Total No. of obs. per region") cnames(`cnames') ///
 rblanks(COL_NAMES "Plot level data" S2220)	 /// Adds blank columns which are used to separate Treatment and Control graphically.
@@ -1258,7 +1254,7 @@ lines(SCOL_NAMES 2 COL_NAMES 2 LAST_ROW 2)  ///
 notes(Point estimates are weighted sample means. Standard errors are reported below. Sub-sample of national sample used. )
 	
 * Save plot level data *
-save "${data}${slash}misclassification_plot_new", replace // SIHS un-commented this line
+save "${data}${slash}misclassification_plot_new", replace 
 
 	
 ********************************************************************************
@@ -1272,7 +1268,7 @@ collapse (max) qpm dtmz maize_cg barley_cg sorghum_cg maize_cgp70 maize_cgp90 ma
 global hhlevel qpm dtmz maize_cg barley_cg sorghum_cg maize_cgp70 maize_cgp90 maize_cgp95 barley_cgp70 barley_cgp90 barley_cgp95 sorghum_cgp70 sorghum_cgp90 sorghum_cgp95 maize_cgy1 maize_cgy2 maize_cgy3 maize_cgy4 barley_cgy1 barley_cgy2 barley_cgy3 barley_cgy4 sorghum_cgy1 sorghum_cgy2 sorghum_cgy3 sorghum_cgy4 maize_ex barley_ex sorghum_ex maize_exp70 maize_exp90 maize_exp95 barley_exp70 barley_exp90 barley_exp95 sorghum_exp70 sorghum_exp90 sorghum_exp95 maize_exy1 maize_exy2 maize_exy3 maize_exy4 barley_exy1 barley_exy2 barley_exy3 barley_exy4 sorghum_exy1 sorghum_exy2 sorghum_exy3 sorghum_exy4 maize_p70 maize_p90 maize_p95 barley_p70 barley_p90 barley_p95 sorghum_p70 sorghum_p90 sorghum_p95 maize_y1 maize_y2 maize_y3 maize_y4 barley_y1 barley_y2 barley_y3 barley_y4 sorghum_y1 sorghum_y2 sorghum_y3 sorghum_y4
 
 
-save "${data}${slash}dna_data_hhlevel_new", replace // SIHS un-commented this line`
+save "${data}${slash}dna_data_hhlevel_new", replace 
 
 matrix drop _all
 foreach var in $hhlevel {
@@ -1550,164 +1546,3 @@ format((SCLR0) (NBCR3) (NBCR0) (NBCR0) (NBCR0) (NBCR3) (NBCR0) (NBCR0) (NBCR0) (
 star(.1 .05 .01)  /// 
 lines(SCOL_NAMES 2 COL_NAMES 2 LAST_ROW 2)  /// 
 notes(Point estimates are weighted sample means. Standard errors are reported below. Sub-sample of national sample used. ) 
-
-// *------------------------------------------------------------------------------
-// * SIHS adding the following code
-// *------------------------------------------------------------------------------
-//
-// * MAIZE MISCLASSIFICATION TABLE
-//
-// * The existing code creates these variables for maize:
-// * maize_tp1 = True positive (CGIAR germplasm + self-reported improved)
-// * maize_tn1 = True negative (No CGIAR germplasm + self-reported traditional) 
-// * maize_fp1 = False positive (No CGIAR germplasm + self-reported improved)
-// * maize_fn1 = False negative (CGIAR germplasm + self-reported traditional)
-//
-// * You're currently working with EA-level collapsed data
-// * To replicate the misclassification table, you need the plot-level data
-//
-// * Load the plot-level data that was saved earlier in the script
-// use "${data}${slash}misclassification_plot_new", clear
-//
-// * Now check what variables are available at plot level
-// describe
-//
-// * The misclassification variables should now be available:
-// * maize_tp1, maize_tn1, maize_fp1, maize_fn1
-//
-// * Check if they exist:
-// ds *tp1* *tn1* *fp1* *fn1*
-//
-// * Create the crosstab table using the existing misclassification variables
-// * Calculate weighted percentages for each cell (these match your table)
-//
-// qui sum maize_tp1 [aw=pw_w4] if wave==4 & maize==1
-// local tp1_pct = round(r(mean)*100, 0.1)
-// local tp1_n = r(sum)
-//
-// qui sum maize_fn1 [aw=pw_w4] if wave==4 & maize==1  
-// local fn1_pct = round(r(mean)*100, 0.1)
-// local fn1_n = r(sum)
-//
-// qui sum maize_fp1 [aw=pw_w4] if wave==4 & maize==1
-// local fp1_pct = round(r(mean)*100, 0.1)
-// local fp1_n = r(sum)
-//
-// qui sum maize_tn1 [aw=pw_w4] if wave==4 & maize==1
-// local tn1_pct = round(r(mean)*100, 0.1)
-// local tn1_n = r(sum)
-//
-// * Calculate row totals
-// local yes_total = round(`tp1_pct' + `fn1_pct', 0.1)
-// local no_total = round(`fp1_pct' + `tn1_pct', 0.1)
-//
-// * Calculate sample sizes for each row
-// count if maize==1 & cg_source=="Yes" & wave==4
-// local yes_n = r(N)
-// count if maize==1 & cg_source=="No" & wave==4  
-// local no_n = r(N)
-// count if maize==1 & wave==4
-// local total_n = r(N)
-//
-// * Display the table
-// display ""
-// display "Table 17: Misclassification rate of adoption status of CGIAR-derived maize varieties at plot level"
-// display "{hline 80}"
-// display "DNA fingerprinting results: | Self-reporting"
-// display "CGIAR-related germplasm?    | Improved  Not Improved  Total    N"
-// display "{hline 80}"
-// display "Yes                         | `tp1_pct'%      `fn1_pct'%     `yes_total'%   `yes_n'"
-// display "No                          | `fp1_pct'%      `tn1_pct'%     `no_total'%   `no_n'"
-// display "{hline 80}"
-// display "Total                       |          |             | 100.0%  `total_n'"
-// display "{hline 80}"
-//
-// *------------------------------------------------------------------------------
-//
-// * BARLEY MISCLASSIFICATION TABLE
-// * Calculate weighted percentages for each cell
-// qui sum barley_tp1 [aw=pw_w4] if wave==4 & barley==1
-// local tp1_pct = round(r(mean)*100, 0.1)
-// local tp1_n = r(sum)
-//
-// qui sum barley_fn1 [aw=pw_w4] if wave==4 & barley==1  
-// local fn1_pct = round(r(mean)*100, 0.1)
-// local fn1_n = r(sum)
-//
-// qui sum barley_fp1 [aw=pw_w4] if wave==4 & barley==1
-// local fp1_pct = round(r(mean)*100, 0.1)
-// local fp1_n = r(sum)
-//
-// qui sum barley_tn1 [aw=pw_w4] if wave==4 & barley==1
-// local tn1_pct = round(r(mean)*100, 0.1)
-// local tn1_n = r(sum)
-//
-// * Calculate row totals
-// local yes_total = round(`tp1_pct' + `fn1_pct', 0.1)
-// local no_total = round(`fp1_pct' + `tn1_pct', 0.1)
-//
-// * Calculate sample sizes for each row
-// count if barley==1 & cg_source=="Yes" & wave==4
-// local yes_n = r(N)
-// count if barley==1 & cg_source=="No" & wave==4  
-// local no_n = r(N)
-// count if barley==1 & wave==4
-// local total_n = r(N)
-//
-// * Display the barley table
-// display ""
-// display "Table: Misclassification rate of adoption status of CGIAR-derived barley varieties at plot level"
-// display "{hline 80}"
-// display "DNA fingerprinting results: | Self-reporting"
-// display "CGIAR-related germplasm?    | Improved  Not Improved  Total    N"
-// display "{hline 80}"
-// display "Yes                         | `tp1_pct'%      `fn1_pct'%     `yes_total'%   `yes_n'"
-// display "No                          | `fp1_pct'%      `tn1_pct'%     `no_total'%   `no_n'"
-// display "{hline 80}"
-// display "Total                       |          |             | 100.0%  `total_n'"
-// display "{hline 80}"
-//
-// *------------------------------------------------------------------------------
-//
-// * SORGHUM MISCLASSIFICATION TABLE
-// * Calculate weighted percentages for each cell
-// qui sum sorghum_tp1 [aw=pw_w4] if wave==4 & sorghum==1
-// local tp1_pct = round(r(mean)*100, 0.1)
-// local tp1_n = r(sum)
-//
-// qui sum sorghum_fn1 [aw=pw_w4] if wave==4 & sorghum==1  
-// local fn1_pct = round(r(mean)*100, 0.1)
-// local fn1_n = r(sum)
-//
-// qui sum sorghum_fp1 [aw=pw_w4] if wave==4 & sorghum==1
-// local fp1_pct = round(r(mean)*100, 0.1)
-// local fp1_n = r(sum)
-//
-// qui sum sorghum_tn1 [aw=pw_w4] if wave==4 & sorghum==1
-// local tn1_pct = round(r(mean)*100, 0.1)
-// local tn1_n = r(sum)
-//
-// * Calculate row totals
-// local yes_total = round(`tp1_pct' + `fn1_pct', 0.1)
-// local no_total = round(`fp1_pct' + `tn1_pct', 0.1)
-//
-// * Calculate sample sizes for each row
-// count if sorghum==1 & cg_source=="Yes" & wave==4
-// local yes_n = r(N)
-// count if sorghum==1 & cg_source=="No" & wave==4  
-// local no_n = r(N)
-// count if sorghum==1 & wave==4
-// local total_n = r(N)
-//
-// * Display the sorghum table
-// display ""
-// display "Table: Misclassification rate of adoption status of CGIAR-derived sorghum varieties at plot level"
-// display "{hline 80}"
-// display "DNA fingerprinting results: | Self-reporting"
-// display "CGIAR-related germplasm?    | Improved  Not Improved  Total    N"
-// display "{hline 80}"
-// display "Yes                         | `tp1_pct'%      `fn1_pct'%     `yes_total'%   `yes_n'"
-// display "No                          | `fp1_pct'%      `tn1_pct'%     `no_total'%   `no_n'"
-// display "{hline 80}"
-// display "Total                       |          |             | 100.0%  `total_n'"
-// display "{hline 80}"

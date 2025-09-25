@@ -379,7 +379,6 @@ local rname `"  `rname'   "`lbl'" " " "'
 
 } 
 
-*  sihs note: error, "invalid syntax"
 * National
 foreach var in $ealevel {
 
@@ -448,7 +447,7 @@ cw(0 110, 1 55, 2 55, 3 30, 4 30, 5 40,
 26 55, 27 55, 28 30, 29 30, 30 40,
 ) /// *Adjust the column width of the table, column 0 are the variable names* 1, 5 and 9 are the blank columns. 
 	format((SCLR0) (NBCR3) (NBCR3) (NBCR0) (NBCR0) (NBCR0) (NBCR3) (NBCR3) (NBCR0) (NBCR0) (NBCR0) (NBCR3) (NBCR3) (NBCR0) (NBCR0) (NBCR0) (NBCR3) (NBCR3) (NBCR0) (NBCR0) (NBCR0) (NBCR3) (NBCR3) (NBCR0) (NBCR0) (NBCR0) (NBCR3) (NBCR3) (NBCR0) (NBCR0) (NBCR0) (NBCR3) (NBCR3) (NBCR0) (NBCR0) (NBCR0) (NBCR3) (NBCR3) (NBCR0) (NBCR0) (NBCR0))  /// * format the columns. Each parentheses represents one column*
-	star(.1 .05 .01)  /// Define your star values/signs here (which are stored in B_STARS) /// sihs note: problem with significance stars /// unable to locate B_STARS martrix /// unable to locate significance stars in ESS4_Characteristics.xml when opened as excel /// unable to locate "*" in ESS4_Characteristics.xml when opened as plain text
+	star(.1 .05 .01)  /// Define your star values/signs here (which are stored in B_STARS) /// 
 
 	lines(SCOL_NAMES 2 COL_NAMES 2 LAST_ROW 13)  /// Draws lines in specific format (Numeric Value)
 	notes(Point estimates are weighted sample means. Rural sample ) //Add your notes here

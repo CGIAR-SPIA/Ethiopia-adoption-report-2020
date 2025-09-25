@@ -64,8 +64,7 @@ set more off
 * a. General Directories
 
 cd "/Users/sophiasalzer/Documents/Ethiopia-adoption-report-2020" // parent directory
-// for GitHub use if in "scripts", see below:
-	* cd ".."` // cd up one level (i.e. Ethiopia-adoption-report-2020 <- scripts)
+// (for GitHub use): if in "scripts": cd ".." // cd up one level (i.e. Ethiopia-adoption-report-2020 <- scripts)
 
 global dir "`c(pwd)'" // set directory global, "dir"
 

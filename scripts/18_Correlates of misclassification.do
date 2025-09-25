@@ -4,24 +4,11 @@
 
 use "${data}${slash}misclassification_plot_new", clear
 drop saq13
-* rename  Parcelroster__id parcel_id // SIHS commented out this line, var is already called "parcel_id" in the repl pkg
-* rename Fieldroster__id field_id // SIHS commented out this line, var is already called "field_id" in the repl pkg
-
 
 merge m:1 household_id parcel_id field_id using "${data}${slash}w4_plotlevel_pp_new"
 drop if _m==2
 drop _m
 merge m:1 ea_id using "${data}${slash}ess4_pp_cov_ea_new"
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                           115
-        from master                        22  (_merge==1)
-        from using                         93  (_merge==2)
-
-    matched                             1,084  (_merge==3)
-    -----------------------------------------
-*/
 drop if _m==2
 drop _merge
 drop saq21

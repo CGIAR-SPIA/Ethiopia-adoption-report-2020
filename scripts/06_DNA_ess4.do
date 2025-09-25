@@ -9,7 +9,6 @@
 * Barcoded sample
 import excel "${rawdata}${slash}ESS4_2018-19${slash}DNA_data_21May20.xlsx", sheet("DNA_data") firstrow clear
 save "${raw4}${slash}PP_DNA_data", replace
-//Count 1,129
 
 * Varieties info - reference library
 import excel "${rawdata}${slash}ESS4_2018-19${slash}Var_data.xlsx", sheet("Var_data") firstrow clear
@@ -44,57 +43,17 @@ save `var_data'
 
 *************************************************************
 
-*use "${raw4}${slash}PP${slash}sect9a_ph_w4", clear // sihs commented out this line and pasted below to try to resolve file reference error
-
-use "${raw4}${slash}PP${slash}sect9a_pp_w4", clear // SIHS NOTE: I changed "9a_ph" -> "9a_pp" in the line calling upon the file. 
-* I think the file the author meant to reference is "sect9a_pp_w4.dta", not "sect9a_ph_w4.dta"
-	* in raw4/pp we have the file "sect9a_pp_w4.dta"
-	* in raw4/ph we have the file "sect9_ph_w4.dta"
-	* based on the fact that the author specified "9a_ph", and not "9_ph". 
-	* I believe the original "9a" specification was correct. I think the "ph" was a mistake, should be "pp"
-	* after running some checks, the variables referenced below (eg. scc*) exist in "9a_pp" and do not exist in "9_ph". confirms that the correct file is "9a_pp"
-
+use "${raw4}${slash}PP${slash}sect9a_pp_w4", clear 
 	rename sccq05 id
 destring id, force replace
 
-
-* SIHS NOTE: Commenting out data correction lines - interview__key variable and referenced IDs don't exist in this dataset
-
-* Enumerator wrongly recoding sorghum sample as maize sample // sihs note: author's original comment
-* replace id=707 if interview__key=="98-70-88-03" & s4q01b==6 // SIHS commented this line out, 
-	* sihs note: `interview__key' does not exist
-	* START sihs troubleshooing
-// 		tab s4q01b // maize code: s4q01b == 2, sorghum code == 6
-// 		count if s4q01b==2 // 2,023 obs (maize)
-// 		count if s4q01b==6 // 1,495 obs (sorghum)
-// 		count if id == 707 & s4q01b==6 // no observations, i.e. 
-// 		tab id if s4q01b==6
-	* troubleshooting conclusion: 
-		* it does not appear that the change to the id value for the obs in question (for some obs where s4q01b==6) were implemented already in the data. there are no observations for which s4q01b==6 and id == 707. therefore, the change was not made
-		* I can't think of a better solution than just commenting out this line
-		* I need to get in touch with someone on the team and find out where interview__key went / what it was changed to
-		* maybe I can search through old files in dropbox or elsewhere to do this
-	* END sihs troubleshooting
-	
 foreach i in sccq01 sccq02a sccq02b sccq03 sccq04 {
 replace `i'=`i'[625] if id==707 
-} // sihs note: 0 real changes made
+} 
 
-// drop if id==707 & s4q01b==2 & interview__key=="98-70-88-03" // SIHS commented this line out
-* sihs comments: 
-	* the variable interview__key does not exist. 
-// count if id==707 & s4q01b==2 // 1 obs, sihs added
-	* only one observation exists for which id == 707 and s4q01b==2. 
-	* I will drop this observation in the line below:
-drop if id == 707 & s4q01b == 2 // sihs added this line
+drop if id == 707 & s4q01b == 2 
 
-// drop if id==154 & s4q01b==2 & interview__key=="99-91-74-53" // SIHS commented this line out
-* sihs comments: 
-	* the variable interview__key does not exist. 
-// count if id==154 & s4q01b==2 // 1 obs, sihs added
-	* only one observation exists for which id == 707 and s4q01b==2. 
-	* I will drop this obs in the line below:
-drop if id == 154 & s4q01b == 2 // sihs addded this line
+drop if id == 154 & s4q01b == 2
 
 *************************************************************
 
@@ -104,80 +63,22 @@ duplicates tag id, g(dup)
 duplicates drop id, force
 
 merge 1:1 id using `dna_data'
-
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                            72
-        from master                        66  (_merge==1) // samples that did not arrive to the lab
-        from using                          6  (_merge==2) // samples that do not come from the field (controls)
-
-    matched                             1,126  (_merge==3)
-    -----------------------------------------
-
-*/
-
 keep if _m==3
 drop _m
 * Merge with reference library
 merge m:1 subbinreferences using `var_data'
-
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                             1
-        from master                         0  (_merge==1)
-        from using                          1  (_merge==2)
-
-    matched                             1,123  (_merge==3)
-    -----------------------------------------
-
-*/
-
 // RLi-ABSHIR-2_A	Barley from var data
-
-
 keep if _m==3
 drop _m
 
 
-* drop saq21 // SIHS NOTE: i commented this out, saq21 does not appear to exist in this dataset
 * Merge with post-planting survey cover
 merge m:1 household_id using "${data}${slash}w4_coverPP_new"
-/*
- Result                           # of obs.
-    -----------------------------------------
-    not matched                         2,098
-        from master                         0  (_merge==1)
-        from using                      2,098  (_merge==2)
-
-    matched                             1,123  (_merge==3)
-    -----------------------------------------
-*/
 keep if _m==3
 drop _m
 
-* merge 1:1 household_id holder_id Parcelroster__id Fieldroster__id Croproster__id s4q01b using "${raw4}${slash}PP${slash}sect4_pp_w4" // SIHS NOTE: these variables dont exist. I replaced this line with the line below, corrected var names
-merge 1:1 household_id holder_id parcel_id field_id crop_id s4q01b using "${raw4}${slash}PP${slash}sect4_pp_w4" // SIHS NOTE: this line includes the variabels that I think the author meant to reference in the line above
+merge 1:1 household_id holder_id parcel_id field_id crop_id s4q01b using "${raw4}${slash}PP${slash}sect4_pp_w4" 
 
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                        15,790
-        from master                         0  (_merge==1)
-        from using                     15,790  (_merge==2)
-
-    matched                             1,123  (_merge==3)
-    -----------------------------------------
-
-
-*/
-
-// keep if _m==3 | (interview__key=="99-91-74-53" & s4q01b==6) | (interview__key=="98-70-88-03" & s4q01b==6) // SIHS commented out
-	* sihs note: interview__key variable doesn't exist in this dataset
-	* replace with line below
 keep if _m == 3 
 drop _m
 

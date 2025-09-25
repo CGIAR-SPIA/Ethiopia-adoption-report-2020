@@ -142,7 +142,7 @@ local rname `"  `rname'   "`lbl'" "'
 mat C= B1, B3, B4, B7, B0, BN
 
 #delimit;
-xml_tab C,  save("$table${slash}Sec6_ESS3.xml") replace sheet("Table 1_hh.", nogridlines) /// // sihs note: xml_tab needs to be installed in master.do 
+xml_tab C,  save("$table${slash}Sec6_ESS3.xml") replace sheet("Table 1_hh.", nogridlines) /// 
 rnames(`rname' "Total No. of obs. per region") cnames(`cnames') 
 ceq("Tigray" "Tigray" "Tigray" "Tigray" "Tigray" 
 "Amhara" "Amhara" "Amhara" "Amhara" "Amhara" 
@@ -215,7 +215,7 @@ matrix list mat`var'N
 matrix colnames mathhd_kabuli_rN = "Mean" "SE" "Min" "Max" "N"
 
 #delimit;
-xml_tab mathhd_kabuli_rN,  save("$table${slash}Sec6_ESS3.xml") append sheet("Table 1_hh_alt", nogridlines) /// // sihs note: xml_tab needs to be installed in master.do
+xml_tab mathhd_kabuli_rN,  save("$table${slash}Sec6_ESS3.xml") append sheet("Table 1_hh_alt", nogridlines) /// 
 rnames(`rname' "Total No. of obs. per region") cnames(`cnames') ceq("National" "National" "National" "National" "National") showeq 	 
 title(Table 1a: ESS3 - Rural Household level - % of households with innovation among household with the specific animal/crop)  font("Times New Roman" 10) 
 cw(0 110, 1 55, 2 55, 3 30, 4 30, 5 40) 
@@ -329,7 +329,7 @@ local rname `"  `rname'   "`lbl'" "'
 
 
 #delimit;
-xml_tab B1 B3 B4 B7 B0 BN,  save("$table${slash}Sec6_ESS3.xml") append sheet("Table 2_hh_rural.", nogridlines)  /// // sihs note: xml_tab needs to be installed in master.do
+xml_tab B1 B3 B4 B7 B0 BN,  save("$table${slash}Sec6_ESS3.xml") append sheet("Table 2_hh_rural.", nogridlines)  /// 
 rnames(`rname' "Total No. of obs. per region") cnames(`cnames') ceq("Tigray" "Tigray" "Tigray" "Tigray" "Tigray" "Amhara"  "Amhara"  "Amhara"  "Amhara" "Amhara" "Oromia" "Oromia" "Oromia" "Oromia" "Oromia" "SNNP"  "SNNP"  "SNNP"  "SNNP" "SNNP" "Other regions" "Other regions" "Other regions" "Other regions" "Other regions" "National" "National" "National" "National" "National" ) showeq
 title(Table 2: ESS3 - PSNP - RURAL sample - Section 6)  font("Times New Roman" 10) 
 cw(0 110, 1 55, 2 55, 3 30, 4 30, 5 40, 
@@ -497,7 +497,7 @@ mat C= B1, B3, B4, B7, B0, BN
 
 
 #delimit ;
-xml_tab C,  save("$table${slash}Sec6_ESS3.xml") append sheet("Table 3_ea.", nogridlines) /// // sihs note: xml_tab needs to be installed in master.do 
+xml_tab C,  save("$table${slash}Sec6_ESS3.xml") append sheet("Table 3_ea.", nogridlines) /// 
 rnames(`rname' "Total No. of obs. per region") cnames(`cnames') ceq("Tigray" "Tigray" "Tigray" "Tigray" "Tigray" "Amhara"  "Amhara"  "Amhara"  "Amhara" "Amhara" "Oromia" "Oromia" "Oromia" "Oromia" "Oromia" "SNNP"  "SNNP"  "SNNP"  "SNNP" "SNNP" "Other regions" "Other regions" "Other regions" "Other regions" "Other regions"  "National" "National" "National" "National" "National" ) showeq 
 rblanks(COL_NAMES "Animal agriculture" S2149, 
 ead_grass_r "Crop germplasm improvements" S2149, 
@@ -622,7 +622,7 @@ local rname `"  `rname'   "`lbl'" "'
 }	
 
 #delimit;
-xml_tab B1 B3 B4 B7 B0 BN,  save("$table${slash}Sec6_ESS3.xml") append sheet("Table 4_ea", nogridlines)  /// // sihs note: xml_tab needs to be installed in master.do
+xml_tab B1 B3 B4 B7 B0 BN,  save("$table${slash}Sec6_ESS3.xml") append sheet("Table 4_ea", nogridlines)  /// 
 rnames(`rname' "Total No. of obs. per region") cnames(`cnames') ceq("Tigray" "Tigray" "Tigray" "Tigray" "Tigray" "Amhara"  "Amhara"  "Amhara"  "Amhara" "Amhara" "Oromia" "Oromia" "Oromia" "Oromia" "Oromia" "SNNP"  "SNNP"  "SNNP"  "SNNP" "SNNP" "Other regions" "Other regions" "Other regions" "Other regions" "Other regions"  "National" "National" "National" "National" "National"  ) showeq ///
 title(Table 4: ESS3 - PSNP - EA - RURAL sample  )  font("Times New Roman" 10) ///
 cw(0 110, 1 55, 2 55, 3 30, 4 30, 5 40, 

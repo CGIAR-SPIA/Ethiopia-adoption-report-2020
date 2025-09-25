@@ -128,7 +128,7 @@ cw(0 110, 1 55, 2 55, 3 30, 4 30, 5 40,
 	notes(Point estimates are weighted sample means. Rural sample ) //Add your notes here
 ;
 #delimit cr		
-*ex
+
 * Upper bound *
 foreach i in  hhd_treadle hhd_motorpump hhd_rdisp hhd_consag1 hhd_swc hhd_cross hhd_livIA hhd_elepgrass hhd_gaya hhd_sasbaniya hhd_alfa hhd_indprod hhd_grass hhd_avocado hhd_mango hhd_papaya hhd_sweetpotato hhd_fieldp commirr plotirr maize sorghum barley hhd_ofsp  hhd_awassa83 {
 	replace `i'=1 if `i'==100

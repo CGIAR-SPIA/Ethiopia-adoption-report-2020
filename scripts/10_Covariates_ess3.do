@@ -187,27 +187,6 @@ g      depend_ratio=(ch4+ch510+m1114+f1114+m60p+f60p)/(m1519+f1519+m2034+f2034+m
 la var depend_ratio "dependency ratio"
 note   depend_ratio: constructed by: (sh_0114+sh_60p)/(1-(sh_0114+sh_60p))
 
-** HOUSEHOLD SIZE IN ADULT EQUIVALENT **
-*****************************************************
-**                Equivalence scales               **
-** Years of age       Men        Women             **
-**    0-1             0.33        0.33             **
-**    1-2             0.46        0.46             **
-**    2-3             0.54        0.54             **
-**    3-5             0.62        0.62             **
-**    5-7             0.74        0.70             **
-**    7-10            0.84        0.72             **
-**    10-12           0.88        0.78             **
-**    12-14           0.96        0.84             **
-**    14-16           1.06        0.86             **
-**    16-18           1.14        0.86             **
-**    18-30           1.04        0.80             **
-**    30-60           1.00        0.82             **
-**    60 plus         0.84        0.74             **
-** Source: Adopted from Dercon and Krishnan (1998) **
-*****************************************************
-
-
 g id_ae =.
 replace id_ae = 0.33 if hh_s1q04a>=0  & hh_s1q04a<1
 replace id_ae = 0.46 if hh_s1q04a>=1  & hh_s1q04a<2
@@ -323,31 +302,13 @@ rename  pp_s3q27_ hh_s1q00
 
 
 merge m:1  household_id2 hh_s1q00 using  "${raw3}${slash}sect1_hh_w3"
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                        21,306
-        from master                       163  (_merge==1)
-        from using                     21,143  (_merge==2)
 
-    matched                            39,192  (_merge==3)
-    -----------------------------------------
-*/
 
 drop if _m==2
 drop _merge
 bys household_id2 parcel_id field_id: egen fhhlab1=count(hh_s1q00) if hh_s1q03==2 & hh_s1q04a>=15
 merge m:1 household_id2 using `agegroup', keepusing(hh_size)
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         2,075
-        from master                        93  (_merge==1)
-        from using                      1,982  (_merge==2)
 
-    matched                            39,262  (_merge==3)
-    -----------------------------------------
-*/
 drop if _m==2
 drop _merge
 
@@ -383,7 +344,6 @@ lab var hhd_flab "Share of female family labor >50%"
 tempfile  hhfamlab1
 save     `hhfamlab1'
  count
-//2,985
 
 
 
@@ -411,18 +371,7 @@ rename  ph_s10q02_ hh_s1q00
 
 
 merge m:1  household_id2 hh_s1q00 using  "${raw3}${slash}sect1_hh_w3"
-/*
 
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                        20,571
-        from master                        50  (_merge==1) //24 hhs
-        from using                     20,521  (_merge==2)
-
-    matched                            44,432  (_merge==3)
-    -----------------------------------------
-
-*/
 
 drop if _m==2
 drop _merge
@@ -430,18 +379,7 @@ drop _merge
 bys household_id2 parcel_id field_id crop_code: egen fhhlab1=count(hh_s1q00) if hh_s1q03==2 & hh_s1q04a>=15
 merge m:1 household_id2 using `agegroup', keepusing(hh_size)
 
-/*
 
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         2,131
-        from master                         0  (_merge==1)
-        from using                      2,131  (_merge==2)
-
-    matched                            44,482  (_merge==3)
-    -----------------------------------------
-
-*/
 drop if _m==2
 drop _merge
 
@@ -606,9 +544,7 @@ use "${data}${slash}ess3_pp_hh", clear
 	* should this line be used for the merge?
 	* should this line be deleted?
 
-// merge 1:1 household_id2  using "${data}HH_LEVEL_DATA_2015_relab" // SIHS commented out this line
-merge 1:1 household_id2  using "${data}${slash}HH_LEVEL_DATA_2015_relab" // SIHS added this line to replace line above, missing "${slash"}" global
-
+merge 1:1 household_id2  using "${data}${slash}HH_LEVEL_DATA_2015_relab" 
 keep if _m==3
 drop _m
 replace wave=3
@@ -624,9 +560,7 @@ save "${data}${slash}ess3_pp_cov", replace
 ********************************************************************************
 
 
-
-*use "${cov3plot}Mereged_plot_level_data", clear // SIHS commented out this line
-use "${cov3plot}${slash}Mereged_plot_level_data", clear // SIHS added this line to replace line above
+use "${cov3plot}${slash}Mereged_plot_level_data", clear 
 keep dist_household plot_srtmslp plot_srtm plot_twi holder_id household_id household_id2 rural pw_w3 parcel_id field_id pp_s3q091 pp_s3q092 pp_s3q093 pp_s3q03c fied_prpa1 fied_prpa2 fied_prpa3 fied_prpa4 pp_s4q05 pp_s4q06 pp_s4q07 
 lab var pp_s3q091  "Field appearance: Flat"
 lab var pp_s3q092  "Field appearance: Sloppy - Moderate"
@@ -644,29 +578,14 @@ lab var pp_s4q07   "Incidence of fungicide"
 
 duplicates drop dist_household plot_srtmslp plot_srtm plot_twi holder_id household_id household_id2 rural pw_w3 parcel_id field_id, force
 
-*save "${data}Mereged_plot_level_data_final", replace / SIHS commented out this line
-save "${data}${slash}Mereged_plot_level_data_final", replace // SIHS added this line to replace line above
+
+save "${data}${slash}Mereged_plot_level_data_final", replace
 
 
+use "${data}${slash}w3_plotlevel_pp", clear
 
+merge 1:1 household_id2 holder_id parcel_id field_id  using "${data}${slash}Mereged_plot_level_data_final" 
 
-* use "${data}w3_plotlevel_pp", clear // SIHS commented out this line
-use "${data}${slash}w3_plotlevel_pp", clear // SIHS added this line to replace line above
-
-* merge 1:1 household_id2 holder_id parcel_id field_id  using "${data}Mereged_plot_level_data_final" // sihs commented out
-merge 1:1 household_id2 holder_id parcel_id field_id  using "${data}${slash}Mereged_plot_level_data_final" // SIHS addeed this line to replace line above
-
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                        13,380
-        from master                    13,380  (_merge==1)
-        from using                          0  (_merge==2)
-
-    matched                            23,074  (_merge==3)
-    -----------------------------------------
-
-*/
 
 drop _merge
 
@@ -681,22 +600,16 @@ clonevar region=saq01
 replace region=0 if region==2 | region==6 | region==15 | region==12 | region==13 | region==5
 
 
-
-* save "${data}ess3_pp_cov_plot", replace // SIHS commented out this line
-save "${data}${slash}ess3_pp_cov_plot", replace // SIHS added this line, missing ${slash}
+save "${data}${slash}ess3_pp_cov_plot", replace 
 
 
 ********************************************************************************
 * EA level
 ********************************************************************************
 
-* use "${cov3com}com_level_merged_S3_S4_S6_S9_merged with WAVE1_v2.dta", clear ///Solomon // SIHS commented out this line, missing ${slash}
+use "${cov3com}${slash}com_level_merged_S3_S4_S6_S9_merged with WAVE1_v2.dta", clear ///Solomon 
 
-use "${cov3com}${slash}com_level_merged_S3_S4_S6_S9_merged with WAVE1_v2.dta", clear ///Solomon // SIHS added this line to replace line above, missing ${slash}
-
-
-* merge m:1 ea_id using  "${data}ess3_pp_ea" //Innovations // SIHS commented out this line, missing ${slash}
-merge m:1 ea_id using  "${data}${slash}ess3_pp_ea" //Innovations // SIHS added this line to replace line above, missing ${slash}
+merge m:1 ea_id using  "${data}${slash}ess3_pp_ea" //Innovations 
 
 keep if _m==3
 drop _m
@@ -801,10 +714,8 @@ replace cs4q150=cs4q15_2011 if cs4q150==.
 replace cs4q150wiz=cs4q15_2011 if cs4q150wiz==.
 
 
-* merge 1:1 ea_id2 using "${data}ess3_ea_psnp" // SIHS commented out this line, missing ${slash}
-merge 1:1 ea_id2 using "${data}${slash}ess3_ea_psnp" // SIHS added this line to replace line above, missing ${slash}
+merge 1:1 ea_id2 using "${data}${slash}ess3_ea_psnp"
 keep if _m==3
 drop _merge
 
-* save "${data}ess3_pp_cov_ea", replace // SIHS commented out this line, missing ${slash}
-save "${data}${slash}ess3_pp_cov_ea", replace // SIHS added this line to replace line above, missing ${slash}
+save "${data}${slash}ess3_pp_cov_ea", replace

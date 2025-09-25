@@ -29,38 +29,7 @@ count //2,939
 tostring saq12, force replace
 destring saq16, force replace
 tab saq14
-/*
-        14. |
-  Location: |
-     rural, |
-town, small |
-       town |      Freq.     Percent        Cum.
-------------+-----------------------------------
-      RURAL |      2,939      100.00      100.00
-------------+-----------------------------------
-      Total |      2,939      100.00
-*/
-
 tab saq01
-
-/*
-
-      Region code |      Freq.     Percent        Cum.
-------------------+-----------------------------------
-           TIGRAY |        388       13.20       13.20
-             AFAR |        324       11.02       24.23
-           AMHARA |        484       16.47       40.69
-           OROMIA |        486       16.54       57.23
-           SOMALI |         56        1.91       59.14
-BENISHANGUL GUMUZ |        215        7.32       66.45
-             SNNP |        424       14.43       80.88
-          GAMBELA |        209        7.11       87.99
-            HARAR |        191        6.50       94.49
-        DIRE DAWA |        162        5.51      100.00
-------------------+-----------------------------------
-            Total |      2,939      100.00
-*/
-
 
 * UNIQUE IDENTIFIER IS: - INTERVIEW__ID
 *						- HOLDER_ID AND HOUSEHOLD_ID
@@ -202,33 +171,7 @@ count //19,339
 * Nb of hh: 2,915 (Interview__id)
 
 tab s3q03
-/*
-  3.During this season, what is |
-     the status of this [FIELD]? |      Freq.     Percent        Cum.
----------------------------------+-----------------------------------
-                   1. Cultivated |     13,377       69.17       69.17
-                      2. Pasture |      1,098        5.68       74.85
-                       3. Fallow |        445        2.30       77.15
-                       4. Forest |        418        2.16       79.32
-5. Land Prepared for Belg Season |        298        1.54       80.86
-               6. Home/Homestead |      3,059       15.82       96.67
-               7. Other(Specify) |        643        3.33      100.00
----------------------------------+-----------------------------------
-                           Total |     19,338      100.00
-
-*/
-
 tab s3q03b
-/*
-  3.During this season, what is |
-    the status of this [FIELD]? |      Freq.     Percent        Cum.
---------------------------------+-----------------------------------
-              1. Temporary crop |      9,020       67.43       67.43
-              2. Permanent crop |      3,217       24.05       91.48
-3. Temporary and permanent crop |      1,140        8.52      100.00
---------------------------------+-----------------------------------
-                          Total |     13,377      100.00
-*/
 
 * Plot is irrigated*
 g plotirr=.
@@ -408,18 +351,6 @@ rename saq06 kebele
 destring region zone woreda city subcity kebele, force replace
 
 merge m:1 region zone woreda using "${rawdata}${slash}Auxiliary_data${slash}ESS3_ET_local_area_unit_conversion"
-
-/*
-Result	#	of obs.
-		
-not matched		12,865
-from master		12,721	(_merge==1)
-from using		144	(_merge==2)
-
-matched		6,618	(_merge==3)
-		
-*/
-
 
 drop if _m==2
 drop _merge
@@ -726,18 +657,6 @@ save     `PP_W4S3'
 
 use "${raw4new}${slash}PP${slash}sect4_pp_w4", clear
 merge m:1   holder_id household_id parcel_id field_id using "${raw4new}${slash}PP${slash}sect3_pp_w4", keepusing(s3q03 s3q03b) 
-
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         5,967
-        from master                         0  (_merge==1)
-        from using                      5,967  (_merge==2)
-
-    matched                            16,913  (_merge==3)
-    -----------------------------------------
-*/
 keep if _m==3
 drop _merge
 *ONLY cultivated plots
@@ -1043,19 +962,6 @@ replace hsell=0 if s4q22==2
 
 * Merge with plot area to gen % of plot area under maize, sorghum and barley
 merge m:1 parcel_id field_id   holder_id household_id ea_id using "${data}${slash}ess4_pp_nrm_plot_new", keepusing(plotarea_full)
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         5,967
-        from master                         0  (_merge==1)
-        from using                      5,967  (_merge==2)
-
-    matched                            16,913  (_merge==3)
-    -----------------------------------------
-*/
-
-
 keep if _m==3
 drop _merge
 
@@ -1271,32 +1177,9 @@ replace ls_type=6 if ls_code==16
 
 
 merge m:1 household_id ls_type holder_id using "${raw4new}${slash}LS${slash}sect8_3_ls_w4"
-
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                             0
-    matched                            42,784  (_merge==3)
-    -----------------------------------------
-
-*/
-
 drop _merge
 
 merge 1:1 household_id ls_code holder_id using "${raw4new}${slash}LS${slash}sect8_4_ls_w4"
-
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                             0
-    matched                            42,784  (_merge==3)
-    -----------------------------------------
-
-*/
-
-
 drop _merge
 
 
@@ -1559,66 +1442,14 @@ save `PP_W4S81'
 use `w4_coverPP', clear
 
 merge 1:1 household_id using `PP_W4S3'
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                            20
-        from master                        20  (_merge==1)
-        from using                          0  (_merge==2)
-
-    matched                             2,879  (_merge==3)
-    -----------------------------------------
-
-*/
-
 drop _merge
 
 merge 1:1 household_id using `PP_W4S81'
-/*
-
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                           262
-        from master                       262  (_merge==1)
-        from using                          0  (_merge==2)
-
-    matched                             2,637  (_merge==3)
-    -----------------------------------------
-*/
-
 drop _merge
 
 merge 1:1 household_id using `pp_w4s4'
-/*
-   Result                           # of obs.
-    -----------------------------------------
-    not matched                           700
-        from master                       700  (_merge==1)
-        from using                          0  (_merge==2)
-
-    matched                             2,199  (_merge==3)
-    -----------------------------------------
-*/
-
 drop _m 
-/*
-*MERGE WITH HH-COVER FOR WEIGHTS
-merge 1:1 household_id using `hh_sectcover'
 
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         4,109
-        from master                       110  (_merge==1)
-        from using                      3,999  (_merge==2)
-
-    matched                             2,789  (_merge==3)
-    -----------------------------------------
-*/
-keep if _m==3
-*/
 lab var sh_hh_largerum_k "Large ruminants - kept" 
 lab var sh_hh_largerum_o "Large ruminants - owned" 
 lab var sh_hh_smallrum_k "Small ruminants - kept"
@@ -1928,20 +1759,6 @@ lab var sh_ea_poultry_o   "Poultry crossbred"
 
 
 merge 1:1 ea_id using "${data}${slash}ess4_community_new"
-/*
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                           285
-        from master                        11  (_merge==1)
-        from using                        274  (_merge==2)
-
-    matched                               253  (_merge==3)
-    -----------------------------------------
-
-
-*/
-
 drop if _m==2
 drop _merge
 
@@ -1956,33 +1773,10 @@ use "${data}${slash}ess4_pp_cropvar_plot_new", clear
 
 
 merge 1:1 holder_id household_id parcel_id field_id using "${data}${slash}ess4_pp_nrm_plot_new"
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         5,967
-        from master                         0  (_merge==1)
-        from using                      5,967  (_merge==2)
-
-    matched                            13,372  (_merge==3)
-    -----------------------------------------
-*/
-
 drop _merge
 
 
 merge m:1  holder_id household_id parcel_id using "${data}${slash}w4_sect2_pp_parcel_new"
-/*
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                           519
-        from master                         1  (_merge==1)
-        from using                        518  (_merge==2)
-
-    matched                            19,337  (_merge==3)
-    -----------------------------------------
-
-*/
-
 drop _merge
 
 drop pw_w4

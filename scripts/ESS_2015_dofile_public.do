@@ -119,10 +119,7 @@ predict asset
 sum asset
 
 xtile asset_index=asset, nq(5)
-* table asset_index, c(mean asset) // SIHS replaced this line with line below
-	* this line is incompatible with Stata 17+ syntax
-	* "c()" i.e. "contents()" is no longer a valid command
-table asset_index, statistic(mean asset) // SIHS added this line to replace line above
+table asset_index, statistic(mean asset)
 keep household_id2 asset asset_index
 compress
 save "$temp${slash}Asset_index", replace
@@ -147,8 +144,7 @@ pca HHown_item30- HHown_item35 , comp(1)
 predict asset
 sum asset
 xtile prod_asset_ndex=asset, nq(5)
-* table prod_asset_ndex, c(mean asset) // SIHS commented out this line - Stata version compatibility problem
-table prod_asset_ndex, statistic(mean asset) // SIHS added this line to replace the line above
+table prod_asset_ndex, statistic(mean asset)
 keep household_id2 asset prod_asset_ndex
 compress
 rename asset asset_prod

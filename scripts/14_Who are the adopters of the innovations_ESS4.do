@@ -24,8 +24,6 @@ parcesizeHA  asset_index pssetindex income_offfarm total_cons_ann totconswin nmt
 ;
 #delimit cr
 
-*ex /// sihs note: not a valid stata command
-
 global adopt     hhd_rdisp hhd_motorpump hhd_rotlegume hhd_cresidue1 hhd_cresidue2 hhd_mintil hhd_zerotill hhd_consag1 hhd_consag2 hhd_swc hhd_terr hhd_wcatch hhd_affor hhd_ploc hhd_ofsp hhd_awassa83 hhd_avocado hhd_papaya hhd_mango  hhd_fieldp hhd_sp hhd_cross  hhd_crlr  hhd_crpo  hhd_indprod hhd_grass hhd_psnp maize_cg sorghum_cg barley_cg dtmz hhd_impcr2 hhd_impcr1
 
 

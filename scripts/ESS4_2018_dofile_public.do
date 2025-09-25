@@ -97,8 +97,7 @@ pca HHown_item1- s10aq06 , comp(1)
 predict asset
 sum asset
 xtile asset_index=asset, nq(5)
-* table asset_index, c(mean asset) // SIHS commented out this line, incompatible with new Stata versions
-table asset_index, statistic(mean asset) // SIHS added this line to replace line above
+table asset_index, statistic(mean asset) 
 keep household_id asset asset_index
 compress
 save "$temp${slash}asse_index", replace
@@ -124,8 +123,7 @@ pca HHown_item29- HHown_item35 , comp(1)
 predict asset_prod
 sum asset_prod
 xtile prod_asset_index=asset, nq(5)
-* table prod_asset_index, c(mean asset) // SIHS commented out this line, incompatible with new Stata versions
-table prod_asset_index, statistic(mean asset) // SIHS added this line to replace line above
+table prod_asset_index, statistic(mean asset)
 keep household_id asset_prod prod_asset_index
 compress
 save "$temp${slash}prod-asse_index", replace
@@ -255,6 +253,7 @@ replace fild_prpa=. if fild_prpa==8
 
 *replace s3q35_os = subinstr(s3q35_os, " ", "", .)
 replace s3q35_o = subinstr(s3q35_o, " ", "", .)								// (!) IMPORTANT CHANGE DOUBLE-CHECK
+* sihs note: author's comment here, does this need checking?
 
 replace fild_prpa= 3 if s3q35_o == "BORROWEDOXEN"
 replace fild_prpa= 3 if s3q35_o == "PARENTS/RELATIVESOXEN"
