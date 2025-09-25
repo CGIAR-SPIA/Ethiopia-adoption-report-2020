@@ -42,7 +42,8 @@ required_packages <- function(packages) {
   }
 }
 
-required_packages(c("readxl", "haven", "dplyr", "sp", "FNN", "ggplot2", "sf", "nabor", "class"))
+required_packages(c("readxl", "haven", "dplyr", "sp", "FNN", "ggplot2", "sf", "nabor","readstata13", "class"))
+
 
 # Set file paths
 data_dir <- "data"
@@ -81,7 +82,7 @@ table(Innov_GPS$CGinovation)
 # Load ESS3 GPS data 
 ESS3_geo <- read_dta(file.path(ess3_dir, "ETH_HouseholdGeovars_y3.dta"))
 
-# Create unique EA coordinates (script works at EA level)
+# Create unique EA coordinates 
 ESS_GPS_ori <- ESS3_geo %>%
   group_by(ea_id2) %>%
   summarise(
@@ -409,4 +410,143 @@ write.csv(ESS.Distances, file.path('data', 'processed', 'ESS.distances.csv'))
 
 
 
-#############           TBC
+# Figure 6: Map of enumeration areas with at least one household adopter of poultry crossbred in 2015/16 (orange) and 2018/19 (blue) ----
+sect3_pp_w4 <- read_dta ("data/raw_data/ESS4_2018-19/Data/PP/sect3_pp_w4.dta")
+
+sect3_pp_w4 <- sect3_pp_w4[!duplicated(sect3_pp_w4$ea_id), ] 
+sect3_pp_w4 <- sect3_pp_w4 [, c(1,5)]
+
+GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster.dta')
+GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster.dta') 
+GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster.dta') 
+
+
+GPS <- rbind (GPS1, GPS2, GPS3); rm (GPS1, GPS2, GPS3)
+GPS <- GPS [, c(1,17,18,20)]
+
+GPS <- merge (sect3_pp_w4, GPS, all.x=TRUE); GPS <- GPS[!is.na (GPS$s3q09__Latitude), ]; GPS <- GPS[!duplicated(GPS$ea_id), ] 
+GPS$ea_id <- as.numeric(GPS$ea_id)
+# Note: replace the 10 lines above by ESS4 EA-level GPS coordinates once released
+
+Maps_4 <- read.csv ("data/raw_data/Auxiliary_data/ESS4_ea level_MAPS.csv") 
+Maps_4 <- merge (Maps_4, GPS, all.x=TRUE); #Maps_4 <- Maps_4[!duplicated(Maps_4$ea_id), ] 
+
+# Get ESS3 GPS coordinates
+Maps_3 <- read.csv ("data/raw_data/Auxiliary_data/ESS3_ea level_MAPS.csv") 
+HouseholdGeovars_Y2 <- read_dta("data/raw_data/ESS2_2013-14/Data/STATA/Pub_ETH_HouseholdGeovars_Y2.dta")
+HouseholdGeovars_Y2 <- HouseholdGeovars_Y2 [, c(3,44,45)]
+HouseholdGeovars_Y2$ea_id <- as.numeric(HouseholdGeovars_Y2$ea_id)
+HouseholdGeovars_Y2 <- HouseholdGeovars_Y2[!duplicated(HouseholdGeovars_Y2$ea_id), ] 
+
+Maps_3 <- merge (HouseholdGeovars_Y2, Maps_3, all.y=TRUE)
+
+#Using Sf instead of maptools
+
+zones <- st_read("data/raw_data/Dashboard locations/Zones_Level_2.shp")
+zones <- st_set_crs(zones, 4326)   # EPSG:4326 is WGS84
+
+Fig6 <- ggplot() +
+  geom_sf(data = zones, colour = "black", fill = NA) +
+  geom_point(data = Maps_4[!is.na(Maps_4$sh_ea_poultry_k), ],
+             aes(x = s3q09__Longitude, y = s3q09__Latitude),
+             size = 1.8, color = '#4E84C4') +
+  geom_point(data = Maps_3[!is.na(Maps_3$sh_ea_poultry), ],
+             aes(x = lon_dd_mod, y = lat_dd_mod),
+             size = 1.8, color = '#D16103') +
+  xlab(" ") + ylab(" ")
+
+# Figure 7: Map of enumeration areas with at least one adopter of HB-1966 barley variety ----
+data <- read.csv('data/raw_data/Auxiliary_data/DNA_data_reports.csv') # Sorghum ID, Purity, DNA
+## Missing data cc <- read_dta("C:/Users/fkosmowski/Documents/2019 Activities/ESS4 Analysis/ESS_2019_data first version/Croproster_12.02.dta") # S4 + crop cut data
+cc <- cc [cc$s4q01b == 1 ,] 
+
+cc$sccq05 [cc$sccq05 %in% c('##N/A##', '')] <- NA
+cc$sccq05 [cc$sccq05 %in% c('##N/A##', '')] <- NA
+cc$sccq05 [cc$sccq05 == 52108921] <- 1215
+cc$sccq05 [cc$sccq05 == 11919186] <- 2577
+cc$sccq05 <- as.numeric(cc$sccq05)
+data <- merge (data, cc, by.x='ID', by.y='sccq05', all.x=TRUE) # Croproster_12.02.dta / DNA are merged
+
+
+# Geographic distribution of samples 
+GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster.dta')
+GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster.dta') 
+GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster.dta') 
+
+GPS <- rbind (GPS1, GPS2, GPS3); rm (GPS1, GPS2, GPS3)
+
+data$Field_ID <- paste (data$interview__id, data$Parcelroster__id, data$Fieldroster__id, sep='.', collapse=NULL)
+GPS$Field_ID <- paste (GPS$interview__id, GPS$Parcelroster__id, GPS$Fieldroster__id, sep='.', collapse=NULL)
+data <- merge (data, GPS, by='Field_ID', all.x=TRUE) 
+# Note: replace the 10 lines above by ESS4 EA-level GPS coordinates
+
+table (data$s3q09__Latitude) # 
+table (data$s3q09__Longitude)
+
+# Maps per variety
+crswgs84=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+zones = readShapePoly("~ replication_files/2_raw_data/Dashboard locations/Zones_Level_2.shp", proj4string=crswgs84,verbose=TRUE)
+data$subbinReferences <- as.character(data$subbinReferences)
+
+# HB-1966
+data.HB <- data [data$subbinReferences == 'RL:HB-1966_B' ,]
+
+Fig7 <- ggplot() + geom_polygon(data = zones, aes(x = long, y = lat, group = group), colour = "black", fill = NA) +
+  geom_point(data = data.HB, aes(x = s3q09__Longitude, y = s3q09__Latitude), size = 1.5, color = 'blue', fill = NA) +
+  xlab(' ') + ylab (' ')
+
+
+# Figure 8: Adoption of improved maize varieties in Ethiopia, 2019 ----
+data <- read.csv('data/raw_data/Auxiliary_data/DNA_data_reports.csv') # Sorghum ID, Purity, DNA
+cc <- read_dta("C:/Users/fkosmowski/Documents/2019 Activities/ESS4 Analysis/ESS_2019_data first version/Croproster_12.02.dta") # S4 + crop cut data
+cc <- cc [cc$s4q01b == 2 ,] 
+
+cc$sccq05 [cc$sccq05 %in% c('##N/A##', '')] <- NA
+cc$sccq05 [cc$sccq05 %in% c('##N/A##', '')] <- NA
+cc$sccq05 [cc$sccq05 == 52108921] <- 1215
+cc$sccq05 [cc$sccq05 == 11919186] <- 2577
+cc$sccq05 <- as.numeric(cc$sccq05)
+data <- merge (data, cc, by.x='ID', by.y='sccq05', all.x=TRUE) 
+
+# Geographic distribution of samples 
+GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster.dta')
+GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster.dta') 
+GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster.dta') 
+
+GPS <- rbind (GPS1, GPS2, GPS3); rm (GPS1, GPS2, GPS3)
+data$Field_ID <- paste (data$interview__id, data$Parcelroster__id, data$Fieldroster__id, sep='.', collapse=NULL)
+GPS$Field_ID <- paste (GPS$interview__id, GPS$Parcelroster__id, GPS$Fieldroster__id, sep='.', collapse=NULL)
+data <- merge (data, GPS, by='Field_ID', all.x=TRUE) 
+# Note: replace the 10 lines above by ESS4 EA-level GPS coordinates once released
+
+table (data$s3q09__Latitude) # 
+table (data$s3q09__Longitude)
+
+# Maps per variety
+crswgs84=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+zones = readShapePoly("data/raw_data/Dashboard locations/Zones_Level_2.shp", proj4string=crswgs84,verbose=TRUE)
+
+data$subbinReferences <- as.character(data$subbinReferences)
+
+# DTMZ, non DTMZ and both
+data$CG_Stats.DTMZ <- ifelse (data$subbinReferences %in% c('RM0472017', 'RM0292017'), 1, 0)
+data$CG_Stats.nonDTMZ <- ifelse (data$subbinReferences %in% c('BH-140', 'RM0262017','RM0512017', 'KULANI', 'RM0042017', 'RM0482017', 'GIBE1', 'RM0012017', 'RM0022017', 'RM0062017'), 1, 0)
+
+ea_DTMZ <- aggregate (CG_Stats.DTMZ ~ saq03b, data, sum)
+ea_nonDTMZ <- aggregate (CG_Stats.nonDTMZ ~ saq03b, data, sum)
+ea <- cbind (ea_DTMZ, ea_nonDTMZ); ea <- ea [, -3]
+
+ea$Both <- ifelse (ea$CG_Stats.DTMZ > 0 & ea$CG_Stats.nonDTMZ > 0, 1, 0)
+
+ea$CG_Stats.DTMZ <- ifelse (ea$Both > 0, 0, ea$CG_Stats.DTMZ)
+ea$CG_Stats.nonDTMZ <- ifelse (ea$Both > 0, 0, ea$CG_Stats.nonDTMZ)
+
+merge <- data [, names(data) %in% c('saq03b', 's3q09__Latitude', 's3q09__Longitude')]
+ea <- merge (ea, merge, all.y=TRUE)
+ea <- ea[!duplicated(ea$saq03b), ]
+
+Fig.8 <- ggplot() + geom_polygon(data = zones, aes(x = long, y = lat, group = group), colour = "black", fill = NA) +
+  geom_point(data = ea [ea$CG_Stats.DTMZ > 0 ,], aes (x = s3q09__Longitude, y = s3q09__Latitude), size = 1.5, color = 'darkgoldenrod1', fill = NA) +
+  geom_point(data = ea [ea$CG_Stats.nonDTMZ > 0 ,], aes (x = s3q09__Longitude, y = s3q09__Latitude), size = 1.5, color = 'royalblue2', fill = NA) + 
+  geom_point(data = ea [ea$Both > 0 ,], aes (x = s3q09__Longitude, y = s3q09__Latitude), size = 1.5, color = 'chartreuse3', fill = NA) +
+  xlab(' ') + ylab (' ')
