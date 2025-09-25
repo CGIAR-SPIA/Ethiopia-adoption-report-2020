@@ -1,8 +1,3 @@
-clear all
-clear matrix
-capture log close
-set more off
-
 ********************************************************************************
 *                           Ethiopia Synthesis Report 
 *                                MASTER DO-FILE
@@ -59,6 +54,11 @@ Output files: -  Adopters characteristics.xml
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+clear all
+clear matrix
+capture log close
+set more off
+
 * 0. PRELIMINARIES
 
 * a. General Directories
@@ -101,12 +101,12 @@ global temp    "${rawdata}${slash}temp"
 global table "${dir}${slash}tables"	// save tables here
 	
 * d. covariates (in raw data subfolder)
-global cov3plot "${rawdata}${slash}Covariates${slash}HH_ AND_PLOT_2015${slash}Plot_level_data_2015"
-global cov3hh   "${rawdata}${slash}Covariates${slash}HH_ AND_PLOT_2015${slash}HH_level_data_2015"
-global cov3com  "${rawdata}${slash}Covariates${slash}community_and do file${slash}Community_level_data_2015"
+global cov3plot "${rawdata}${slash}Covariates${slash}HH_AND_PLOT_2015${slash}Plot_level_data_2015"
+global cov3hh   "${rawdata}${slash}Covariates${slash}HH_AND_PLOT_2015${slash}HH_level_data_2015"
+global cov3com  "${rawdata}${slash}Covariates${slash}community_and_do_file${slash}Community_level_data_2015"
 global cov4plot "${rawdata}${slash}Covariates${slash}plot_hh_level_2018${slash}Plot_level_data_2018"
 global cov4hh   "${rawdata}${slash}Covariates${slash}plot_hh_level_2018${slash}HH_level_data_2018"
-global cov4com  "${rawdata}${slash}Covariates${slash}community and do file_2018${slash}Community_level_data_2018"
+global cov4com  "${rawdata}${slash}Covariates${slash}community_and_do_file_2018${slash}Community_level_data_2018"
 
 * e. installation of packages, sihs added
 ssc install xml_tab, replace
