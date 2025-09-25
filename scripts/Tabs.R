@@ -277,7 +277,7 @@ combined_plot <- grid.arrange(
 # ===============================================================================
 
 # Load absolute adoption data
-Abs_data <- read.csv(file.path("data", "3_report_data", "Absolute_plots.csv"))
+Abs_data <- read.csv(file.path("data", "report_data", "Absolute_plots.csv"))
 
 # Create Figure 9
 figure9 <- ggplot(data = Abs_data, aes(reorder(Innovation, N2), y = N2)) + 
