@@ -60,6 +60,9 @@ Panel on Impact Assessment (SPIA).
 - Technical Issues/Repository Issues: (spia@cgiar.org) Sophia/& Milcah??
 - Data Questions: Refer to original ESS documentation e.g., **[Socioeconomic Survey 2018-2019](https://microdata.worldbank.org/index.php/catalog/3823/study-description)** ??
 
+# Permissions/Access 
+
+SPIA encourages fair use of this material under the terms of Creative Commons Attribution 4.0 (BY-NC-SA 4.0) providing proper citation is made.
 
 # Funding Acknowledgments
 
