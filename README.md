@@ -20,7 +20,7 @@ The repo includes the following folders:
 ```
 ethiopia-adoption-report-2020/
 ├── data/
-│   ├── raw_data/          # Original ESS survey data  ????
+│   ├── raw_data/          # Original ESS survey data  ???? was there any pre-preparation we also have other types like auxillary was this part of ESS 
 │   ├── processed_data/    # Cleaned and merged datasets ???
 │   └── report_data/         # DNA fingerprinting data ???
 ├── scripts/
