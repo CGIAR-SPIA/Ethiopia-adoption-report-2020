@@ -3,10 +3,10 @@ Welcome to this repository, which contains the replication files for **[Shining 
 
 This repository provides the code and supporting data needed to reproduce the tables and figures in the Ethiopia synthesis report. Using data from the Ethiopian Socioeconomic Survey (ESS), the research documents adoption patterns across 19 innovations spanning:
 
-- **Animal agriculture** 
-- **Crop germplasm improvement** 
-- **Natural resource management** 
-- **Policies and markets interventions**
+- Animal agriculture
+- Crop germplasm improvement
+- Natural resource management
+- Policies and markets interventions
 
 # Getting Started
 ## Prerequisites
@@ -31,9 +31,6 @@ ethiopia-adoption-report-2020/
 ├── outputs/
 │   ├── tables/          # Generated tables (Excel format)
 │   ├── figures/         # Maps and visualizations
-├── documentation/          **any of this that we need to include** 
-│   ├── questionnaires/  # ESS survey instruments ??? 
-│   └── methodology/    # Technical notes
 └── README.md`
 ```
 Script Organization
@@ -48,14 +45,7 @@ Script Organization
 
 - **Stata scripts**: follows a modular analysis pipeline structure with a master script  `1_master.do` - this executes the entire pipeline and generates all Stata outputs. If running specific components, run individual scripts in order specified.
 - **R scripts**:  run independently
-- Tables 1, 4-8, 21, 23-27 come from external sources (stocktaking document, questionnaires, variety registries)
-
-
-# Survey Coverage
-
-- ESS3 (2015/16): **290** enumeration areas, 3,235 rural households
-- ESS4 (2018/19): **264** enumeration areas, 2,899 rural households
-
+- Tables 1, 4-8, 21, 23-27 come from external sources (**[Stocktake document - SPIA Ethiopia Report](https://cgspace.cgiar.org/items/12ee33af-4d8e-4c72-baca-599a994ecbda)**,  ESS questionnaires, variety registries in the report Appendices)
 
 # Citation
 
@@ -67,9 +57,9 @@ Panel on Impact Assessment (SPIA).
 # Contact & Support
 
 - Primary Contact: SPIA (spia@cgiar.org) / Fredric ??
-- Technical Issues/Repository Issues: Sophia/& Milcah??
-- Data Questions: World Bank LSMS team or Ethiopian Central Statistical Agency ?? Refer to original ESS documentation??
-- 
+- Technical Issues/Repository Issues: (spia@cgiar.org) Sophia/& Milcah??
+- Data Questions: Refer to original ESS documentation e.g., **[Socioeconomic Survey 2018-2019](https://microdata.worldbank.org/index.php/catalog/3823/study-description)** ??
+
 
 # Funding Acknowledgments
 
