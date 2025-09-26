@@ -407,25 +407,21 @@ ESS.Distances <- cbind(ESS.Distances,
 write.csv(ESS.Distances, file.path('data', 'processed', 'ESS.distances.csv'))
 
 
-
-
-
 # Figure 6: Map of enumeration areas with at least one household adopter of poultry crossbred in 2015/16 (orange) and 2018/19 (blue) ----
 sect3_pp_w4 <- read_dta ("data/raw_data/ESS4_2018-19/Data/PP/sect3_pp_w4.dta")
 
 sect3_pp_w4 <- sect3_pp_w4[!duplicated(sect3_pp_w4$ea_id), ] 
 sect3_pp_w4 <- sect3_pp_w4 [, c(1,5)]
-
 GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster.dta')
 GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster.dta') 
 GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster.dta') 
-
 
 GPS <- rbind (GPS1, GPS2, GPS3); rm (GPS1, GPS2, GPS3)
 GPS <- GPS [, c(1,17,18,20)]
 
 GPS <- merge (sect3_pp_w4, GPS, all.x=TRUE); GPS <- GPS[!is.na (GPS$s3q09__Latitude), ]; GPS <- GPS[!duplicated(GPS$ea_id), ] 
 GPS$ea_id <- as.numeric(GPS$ea_id)
+
 # Note: replace the 10 lines above by ESS4 EA-level GPS coordinates once released
 
 Maps_4 <- read.csv ("data/raw_data/Auxiliary_data/ESS4_ea level_MAPS.csv") 
@@ -439,8 +435,6 @@ HouseholdGeovars_Y2$ea_id <- as.numeric(HouseholdGeovars_Y2$ea_id)
 HouseholdGeovars_Y2 <- HouseholdGeovars_Y2[!duplicated(HouseholdGeovars_Y2$ea_id), ] 
 
 Maps_3 <- merge (HouseholdGeovars_Y2, Maps_3, all.y=TRUE)
-
-#Using Sf instead of maptools
 
 zones <- st_read("data/raw_data/Dashboard locations/Zones_Level_2.shp")
 zones <- st_set_crs(zones, 4326)   # EPSG:4326 is WGS84
@@ -457,7 +451,7 @@ Fig6 <- ggplot() +
 
 # Figure 7: Map of enumeration areas with at least one adopter of HB-1966 barley variety ----
 data <- read.csv('data/raw_data/Auxiliary_data/DNA_data_reports.csv') # Sorghum ID, Purity, DNA
-## Missing data cc <- read_dta("C:/Users/fkosmowski/Documents/2019 Activities/ESS4 Analysis/ESS_2019_data first version/Croproster_12.02.dta") # S4 + crop cut data
+cc <- read_dta("data/raw_data/ESS4_2018-19/Data/PP/Croproster_12.02.dta") # S4 + crop cut data
 cc <- cc [cc$s4q01b == 1 ,] 
 
 cc$sccq05 [cc$sccq05 %in% c('##N/A##', '')] <- NA
@@ -484,21 +478,27 @@ table (data$s3q09__Latitude) #
 table (data$s3q09__Longitude)
 
 # Maps per variety
-crswgs84=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
-zones = readShapePoly("~ replication_files/2_raw_data/Dashboard locations/Zones_Level_2.shp", proj4string=crswgs84,verbose=TRUE)
-data$subbinReferences <- as.character(data$subbinReferences)
 
-# HB-1966
-data.HB <- data [data$subbinReferences == 'RL:HB-1966_B' ,]
+zones <- st_read("data/raw_data/Dashboard locations/Zones_Level_2.shp")
 
-Fig7 <- ggplot() + geom_polygon(data = zones, aes(x = long, y = lat, group = group), colour = "black", fill = NA) +
-  geom_point(data = data.HB, aes(x = s3q09__Longitude, y = s3q09__Latitude), size = 1.5, color = 'blue', fill = NA) +
-  xlab(' ') + ylab (' ')
+zones_df <- zones %>%
+  st_coordinates() %>%
+  as.data.frame() %>%
+  rename(long = X, lat = Y) %>%
+  mutate(group = paste(L2, L1, sep = "."))  # This creates unique groups per polygon
 
+# Your plotting code remains the same
+data.HB <- data[data$subbinReferences == 'RL:HB-1966_B', ]
+Fig7 <- ggplot() +
+  geom_sf(data = zones, colour = "black", fill = NA) +
+  geom_point(data = data.HB, aes(x = s3q09__Longitude, y = s3q09__Latitude), 
+             size = 1.5, color = 'blue') +
+  xlab(' ') + ylab(' ') +  
+  theme_minimal()  
 
 # Figure 8: Adoption of improved maize varieties in Ethiopia, 2019 ----
 data <- read.csv('data/raw_data/Auxiliary_data/DNA_data_reports.csv') # Sorghum ID, Purity, DNA
-cc <- read_dta("C:/Users/fkosmowski/Documents/2019 Activities/ESS4 Analysis/ESS_2019_data first version/Croproster_12.02.dta") # S4 + crop cut data
+cc <- read_dta("data/raw_data/ESS4_2018-19/Data/PP/Croproster_12.02.dta")  # S4 + crop cut data
 cc <- cc [cc$s4q01b == 2 ,] 
 
 cc$sccq05 [cc$sccq05 %in% c('##N/A##', '')] <- NA
@@ -523,8 +523,8 @@ table (data$s3q09__Latitude) #
 table (data$s3q09__Longitude)
 
 # Maps per variety
-crswgs84=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
-zones = readShapePoly("data/raw_data/Dashboard locations/Zones_Level_2.shp", proj4string=crswgs84,verbose=TRUE)
+# Read shapefile with sf (replaces readShapePoly and CRS)
+zones <- st_read("data/raw_data/Dashboard locations/Zones_Level_2.shp")
 
 data$subbinReferences <- as.character(data$subbinReferences)
 
@@ -545,8 +545,16 @@ merge <- data [, names(data) %in% c('saq03b', 's3q09__Latitude', 's3q09__Longitu
 ea <- merge (ea, merge, all.y=TRUE)
 ea <- ea[!duplicated(ea$saq03b), ]
 
-Fig.8 <- ggplot() + geom_polygon(data = zones, aes(x = long, y = lat, group = group), colour = "black", fill = NA) +
-  geom_point(data = ea [ea$CG_Stats.DTMZ > 0 ,], aes (x = s3q09__Longitude, y = s3q09__Latitude), size = 1.5, color = 'darkgoldenrod1', fill = NA) +
-  geom_point(data = ea [ea$CG_Stats.nonDTMZ > 0 ,], aes (x = s3q09__Longitude, y = s3q09__Latitude), size = 1.5, color = 'royalblue2', fill = NA) + 
-  geom_point(data = ea [ea$Both > 0 ,], aes (x = s3q09__Longitude, y = s3q09__Latitude), size = 1.5, color = 'chartreuse3', fill = NA) +
-  xlab(' ') + ylab (' ')
+Fig8 <- ggplot() + 
+  geom_sf(data = zones, colour = "black", fill = NA) +
+  geom_point(data = ea[ea$CG_Stats.DTMZ > 0, ], 
+             aes(x = s3q09__Longitude, y = s3q09__Latitude), 
+             size = 1.5, color = 'darkgoldenrod1') +
+  geom_point(data = ea[ea$CG_Stats.nonDTMZ > 0, ], 
+             aes(x = s3q09__Longitude, y = s3q09__Latitude), 
+             size = 1.5, color = 'royalblue2') + 
+  geom_point(data = ea[ea$Both > 0, ], 
+             aes(x = s3q09__Longitude, y = s3q09__Latitude), 
+             size = 1.5, color = 'chartreuse3') +
+  xlab(' ') + ylab(' ') +
+  theme_minimal()
