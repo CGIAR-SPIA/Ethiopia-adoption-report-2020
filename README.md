@@ -62,7 +62,7 @@ Panel on Impact Assessment (SPIA).
 
 # Permissions/Access 
 
-SPIA encourages fair use of this material under the terms of Creative Commons Attribution 4.0 (BY-NC-SA 4.0) providing proper citation is made.
+SPIA encourages fair use of this material under the terms of Creative Commons Attribution 4.0 (BY-NC-SA 4.0) provided proper citation is made.
 
 # Funding Acknowledgments
 
