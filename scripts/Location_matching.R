@@ -129,7 +129,7 @@ st_crs(zones) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
 Figure5 <- ggplot() + 
   geom_sf(data = zones, fill = "grey92", color = "white", size = 0.3) +
   geom_point(data = Innov_GPS, aes(x = x_c, y = y_c), size = 0.2, color = 'darkcyan') +
-  ggtitle('Figure 5: Location of CGIAR projects in Ethiopia by core domain, 1999-2019') +
+  ggtitle('') +
   facet_wrap(~ CGcore, ncol = 3) +
   theme_minimal() +
   theme(
@@ -140,6 +140,17 @@ Figure5 <- ggplot() +
   labs(x = "", y = "")
 
 print(Figure5)
+
+# Define your title
+fig_title <- "figure5"
+
+# Save using the cleaned title
+ggsave(
+  filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
+  plot = Figure5,
+  width = 8, height = 6, dpi = 300
+)
+
 
 # Section 4: Calculate distances for each innovation ----------------------
 
@@ -496,6 +507,16 @@ Fig7 <- ggplot() +
   xlab(' ') + ylab(' ') +  
   theme_minimal()  
 
+# Define your title
+fig_title <- "figure7"
+
+# Save using the cleaned title
+ggsave(
+  filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
+  plot = Fig7,
+  width = 8, height = 6, dpi = 300
+)
+
 # Figure 8: Adoption of improved maize varieties in Ethiopia, 2019 ----
 data <- read.csv('data/raw_data/Auxiliary_data/DNA_data_reports.csv') # Sorghum ID, Purity, DNA
 cc <- read_dta("data/raw_data/ESS4_2018-19/Data/PP/Croproster_12.02.dta")  # S4 + crop cut data
@@ -558,3 +579,13 @@ Fig8 <- ggplot() +
              size = 1.5, color = 'chartreuse3') +
   xlab(' ') + ylab(' ') +
   theme_minimal()
+
+# Define your title
+fig_title <- "figure8"
+
+# Save using the cleaned title
+ggsave(
+  filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
+  plot = Fig8,
+  width = 8, height = 6, dpi = 300
+)
