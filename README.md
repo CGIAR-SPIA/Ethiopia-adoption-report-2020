@@ -56,8 +56,7 @@ Panel on Impact Assessment (SPIA).
 
 # Contact & Support
 
-- Primary Contact: SPIA (spia@cgiar.org) / Fredric ??
-- Technical Issues/Repository Issues: (spia@cgiar.org) Sophia/& Milcah??
+- Primary Contact: SPIA (spia@cgiar.org) 
 - Data Questions: Refer to original ESS documentation e.g., **[Socioeconomic Survey 2018-2019](https://microdata.worldbank.org/index.php/catalog/3823/study-description)** ??
 
 # Permissions/Access 
