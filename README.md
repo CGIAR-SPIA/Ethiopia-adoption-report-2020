@@ -44,12 +44,12 @@ Scripts Organization
 
 - **Stata scripts**: follows a modular analysis pipeline structure with a master script  `1_master.do` - this executes the entire pipeline and generates all Stata outputs. If running specific components, run individual scripts in order specified.
 
-**Before Running the Code**
+  **Before Running the scripts**
 
-    - Clone this repository to your local machine
+  1. Clone this repository to your local machine
+  2. Open the main `master.do` file and update parent directory with your local path:
 
-    - Open the main `master.do` file and update parent directory with your local path:
-              cd "YOUR/PATH/TO/Ethiopia-adoption-report-2020"
+     `cd "YOUR/PATH/TO/Ethiopia-adoption-report-2020"`
 - **R scripts**:  run independently
 - Tables 1, 4-8, 21, 23-27 come from external sources (**[Stocktake document - SPIA Ethiopia Report](https://cgspace.cgiar.org/items/12ee33af-4d8e-4c72-baca-599a994ecbda)**,  ESS questionnaires, variety registries in the report Appendices)
 
@@ -63,7 +63,7 @@ Panel on Impact Assessment (SPIA).
 # Contact & Support
 
 - Primary Contact: SPIA (spia@cgiar.org) 
-- Data Questions: Refer to original ESS documentation e.g., **[Socioeconomic Survey 2018-2019](https://microdata.worldbank.org/index.php/catalog/3823/study-description)** ??
+- Data Questions: Refer to original ESS documentation e.g., **[Socioeconomic Survey 2018-2019](https://microdata.worldbank.org/index.php/catalog/3823/study-description)** 
 
 # Permissions/Access 
 
