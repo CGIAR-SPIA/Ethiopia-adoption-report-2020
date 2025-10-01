@@ -8,13 +8,6 @@ This repository provides the code and supporting data needed to reproduce the ta
 - Natural resource management
 - Policies and markets interventions
 
-# Getting Started
-## Prerequisites
-
-- Stata 15+ with required dependencies 
-- R 4.0+ with required packages
-
-
 The repo includes the following folders:
 
 ```
@@ -33,7 +26,7 @@ ethiopia-adoption-report-2020/
 │   ├── figures/         # Maps and visualizations
 └── README.md`
 ```
-Script Organization
+Scripts Organization
 
 | Script File | Purpose | Tables Generated | Figures Generated |
 |:------------|:--------|:----------------:|:-----------------:|
@@ -41,9 +34,24 @@ Script Organization
 | `Tabs.R` | DNA fingerprinting analysis | 10, 11, 12 | 4, 9 |
 | `Location_Matching.R` | Spatial analysis & mapping | 31, 32 | 5, 6, 7, 8 |
 
-### Dependencies
+### # Getting Started
+## Prerequisites
+
+- Stata 15+ with required dependencies 
+- R 4.0+ with required packages
+- 
+**Dependencies**
 
 - **Stata scripts**: follows a modular analysis pipeline structure with a master script  `1_master.do` - this executes the entire pipeline and generates all Stata outputs. If running specific components, run individual scripts in order specified.
+
+**Before Running the Code**
+
+     1. Clone this repository to your local machine
+
+    2. Open the main `.do` file and **update line 1** with your local path:
+       ```stata
+              cd "YOUR/PATH/TO/Ethiopia-adoption-report-2020"
+        
 - **R scripts**:  run independently
 - Tables 1, 4-8, 21, 23-27 come from external sources (**[Stocktake document - SPIA Ethiopia Report](https://cgspace.cgiar.org/items/12ee33af-4d8e-4c72-baca-599a994ecbda)**,  ESS questionnaires, variety registries in the report Appendices)
 
