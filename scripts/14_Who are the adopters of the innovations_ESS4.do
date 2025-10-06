@@ -71,17 +71,11 @@ matrix mstrhelp`i'=(0,0,0,0,0)
     
 scalar `var'df`i'=(`var'mt`i'-`var'mc`i') //Simple difference
 
-*scalar `var'df`i'=((`var'mt`i'-`var'mc`i') / sqrt((`var'vart`i'+ `var'varc`i')/2))
-
 qui: reg `var' `i' if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pval`i'=r(p)
 
 qui: reg `var' `i'   i.region if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pvalf`i'=r(p)
 
@@ -301,17 +295,11 @@ matrix mstrhelp`i'=(0,0,0,0,0)
     
 scalar `var'df`i'=(`var'mt`i'-`var'mc`i') //Simple difference
 
-*scalar `var'df`i'=((`var'mt`i'-`var'mc`i') / sqrt((`var'vart`i'+ `var'varc`i')/2))
-
 qui: reg `var' `i' if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pval`i'=r(p)
 
 qui: reg `var' `i'   i.region if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pvalf`i'=r(p)
 
@@ -518,17 +506,11 @@ matrix mstrhelp`i'=(0,0,0,0,0)
     
 scalar `var'df`i'=(`var'mt`i'-`var'mc`i') //Simple difference
 
-*scalar `var'df`i'=((`var'mt`i'-`var'mc`i') / sqrt((`var'vart`i'+ `var'varc`i')/2))
-
 qui: reg `var' `i' if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pval`i'=r(p)
 
 qui: reg `var' `i'   i.region if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pvalf`i'=r(p)
 
@@ -752,17 +734,11 @@ matrix mstrhelp`i'=(0,0,0,0,0)
     
 scalar `var'df`i'=(`var'mt`i'-`var'mc`i') //Simple difference
 
-*scalar `var'df`i'=((`var'mt`i'-`var'mc`i') / sqrt((`var'vart`i'+ `var'varc`i')/2))
-
 qui: reg `var' `i' if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pval`i'=r(p)
 
 qui: reg `var' `i'   i.region if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pvalf`i'=r(p)
 
@@ -1107,17 +1083,11 @@ matrix mstrhelp`i'=(0,0,0,0,0)
     
 scalar `var'df`i'=(`var'mt`i'-`var'mc`i') //Simple difference
 
-*scalar `var'df`i'=((`var'mt`i'-`var'mc`i') / sqrt((`var'vart`i'+ `var'varc`i')/2))
-
 qui: reg `var' `i' if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pval`i'=r(p)
 
 qui: reg `var' `i'   i.region if  wave==4 [pw=pw_w4]
-*local t = _b[`i']/_se[`i']
-*scalar `var'pval`i' = 2*ttail(e(df_r), abs(`t'))
 test `i'=0
 scalar `var'pvalf`i'=r(p)
 

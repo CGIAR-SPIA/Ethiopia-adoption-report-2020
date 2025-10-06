@@ -539,11 +539,6 @@ save "${data}${slash}HH_LEVEL_DATA_2015_relab", replace
 ********************************************************************************
 use "${data}${slash}ess3_pp_hh", clear
 
-* merge 1:1 household_id2 using "${raw3}\\sect_cover_hh_w3" // sihs note below:
-	* author commented this line out, not clear why. 
-	* should this line be used for the merge?
-	* should this line be deleted?
-
 merge 1:1 household_id2  using "${data}${slash}HH_LEVEL_DATA_2015_relab" 
 keep if _m==3
 drop _m

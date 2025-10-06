@@ -69,8 +69,7 @@ cd "/Users/sophiasalzer/Documents/Ethiopia-adoption-report-2020" // parent direc
 
 global dir "`c(pwd)'" // set directory global, "dir"
 
-* b. automatic slash detection - adedd by SIHS, 7/16/2025
-
+* b. automatic slash detection
 if c(os) == "Windows" {
     global slash "\"
 }
@@ -102,7 +101,7 @@ global temp    "${rawdata}${slash}temp"
 
 * results folder
 global output "${dir}${slash}outputs" // outputs folder (contains tabs & figs)
-global table "${output}${slash}tables"	// tables subfolder
+global table "${output}${slash}tables"	// tables subfolder // use for final master.do and for 04 OG check
 global figure "${output}${slash}figures" // figures subfolder
 
 * d. covariates (in raw data subfolder)
@@ -113,7 +112,7 @@ global cov4plot "${rawdata}${slash}Covariates${slash}plot_hh_level_2018${slash}P
 global cov4hh   "${rawdata}${slash}Covariates${slash}plot_hh_level_2018${slash}HH_level_data_2018"
 global cov4com  "${rawdata}${slash}Covariates${slash}community_and_do_file_2018${slash}Community_level_data_2018"
 
-* e. installation of packages, sihs added
+* e. installation of packages
 ssc install xml_tab, replace
 ssc install winsor2, replace
 ssc install fre, replace

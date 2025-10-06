@@ -627,7 +627,6 @@ order pp_s3q14 fert_orginor_both inorgfer,after (pp_s3q37)
 
 gen cult = 1 if pp_s3q03==1
 replace  cult=0 if pp_s3q03!=1 & pp_s3q03!=.
-*edit pp_s3q03c cult pp_s3q03
 sort pp_s3q03c cult pp_s3q03
 bys pp_s3q03c : fre pp_s3q03
 bys cult:fre pp_s3q03c

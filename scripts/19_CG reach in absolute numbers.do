@@ -12,8 +12,6 @@ merge 1:1 household_id using "${data}${slash}ess4_dna_hh_new"
 
 g       dnadata=0
 replace dnadata=1 if _m==3
-*keep if _m==3
-
 g       anycr=0
 replace anycr=1 if cr1==1 | cr2==1 | cr6==1
 

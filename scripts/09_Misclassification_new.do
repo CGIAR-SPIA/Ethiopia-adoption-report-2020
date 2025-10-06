@@ -10,8 +10,6 @@
 * DNA fingerprinting data - Misclassification estimates *
 
 * SR
-* (s4q11==1) == improved
-* (s4q11>1 & s4q11!=.) == not improved
 
 use "${data}${slash}ess4_dna_new", clear
 

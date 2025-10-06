@@ -1540,14 +1540,6 @@ local vars nrm ca crop tree animal breed breed2 psnp rotlegume cresidue mintilla
 
 local vars2  ca crop tree animal breed breed2 psnp rotlegume cresidue mintillage zerotill ca1 ca2 ca3 ca4 ca5
 
-
-/*
-quietly estpost correlate `vars' [pw=pw_w4], matrix 
-esttab using "${graphs}\ESS4_corr.csv", label not unstack compress  long b(%9.2f) replace
-*/
-
-
-
 foreach var of local vars {
 local lbl : variable label `var'
 foreach i of local vars2 {

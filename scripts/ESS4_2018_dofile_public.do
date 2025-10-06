@@ -80,11 +80,7 @@ for var s10aq08- s10aq38:replace X=. if X==.a
 for var s10aq08 - s10aq38 : tabulate X , gen(X )
 save "$temp${slash}sect10a_hh_w4_houseing", replace
 
-*merge 1:1 household_id using "C:\Users\SAlemu\Desktop\ESS_4_2018_May\ESS4_Analysis\sect11_hh_w4_asset.dta" // sihs note below
-	* this line left commented out by author 
-	* unclear to me if I should try to use this merge or leave it commented
 merge 1:1 household_id using "$temp${slash}sect11_hh_w4_asset.dta"
-*edit if _merge==1
 keep if _merge==3
 drop  s10aq271 - s10aq2716
 save "$temp${slash}asset_houseing", replace
@@ -166,7 +162,6 @@ save "$temp${slash}HH_LEVEL_DATA", replace
 use "${raw4}${slash}PP${slash}sect2_pp_w4",clear
 
 order s2q16,after ( s2q17 )
-*order s2q03,after ( s2q16_os)
 recode s2q16 (7=6)
 recode s2q03 (2=0)
 label define Yes_no 1 "Yes" 0 "No", replace
@@ -251,9 +246,7 @@ fre fild_prpa
 replace fild_prpa=. if fild_prpa==7
 replace fild_prpa=. if fild_prpa==8
 
-*replace s3q35_os = subinstr(s3q35_os, " ", "", .)
-replace s3q35_o = subinstr(s3q35_o, " ", "", .)								// (!) IMPORTANT CHANGE DOUBLE-CHECK
-* sihs note: author's comment here, does this need checking?
+replace s3q35_o = subinstr(s3q35_o, " ", "", .)
 
 replace fild_prpa= 3 if s3q35_o == "BORROWEDOXEN"
 replace fild_prpa= 3 if s3q35_o == "PARENTS/RELATIVESOXEN"

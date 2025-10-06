@@ -259,9 +259,6 @@ rename  Marital_head2 marr_head
 lab var marr_head     "HH-head is married"
 rename  mainoc_head2 agr_head 
 lab var agr_head      "HH-head main occupation is agriculture"
-*lab var adulteq  "HH size in adult equivalent" // sihs note below:
-	* author commented out this line. why?
-	* no label for HH size in adult equivalent?
 rename  asset_index asset_quint
 lab var asset_quint   "Asset index - quintiles"
 rename  asset asset_index
@@ -471,10 +468,6 @@ lab var cs4q014              "Type of main access road surfarce: dirt track" //b
 
 lab var cs4q03               "Vehicles pass on the main road throughout the year" //bin
 
-
-
-*lab var dist_roadmedi2015    "HH distance to nearest major road (GPS) -median values"
-	* sihs note: no label for dist_roadmedi2015 ?
 lab var cs4q08               "Community is a woreda town"                                //bin
 lab var cs4q09               "Distance to the nearest Woreda/town (KM)"
 lab var cs4q09_wiz           "Distance to the nearest Woreda/town (KM) - winsorized"
@@ -483,12 +476,10 @@ lab var cs4q11               "Community is a major urban center (Regional or Zon
 lab var cs4q12b              "Distance to the major urban center (KM)"
 lab var cs4q12b_wiz          "Distance to the major urban center (KM) - winsorized" 
 rename  cs4q12b_wiz cs4q12bwiz
-*lab var dist_admctrmedi2015  "HH distance to Capital of Zone of residence (KM) - median values"
 lab var cs4q14               "Large weekly market in this community" //bin
 lab var cs4q15 				 "Distance to the nearest large weekly market (KM)"
 lab var cs4q15_wiz 			 "Distance to the nearest large weekly market (KM) - winsorized"
 rename  cs4q15_wiz cs4q15wiz
-*lab var dist_marketmedi2015  "HH distance to nearest market (KM) - median values"
 
 lab var cs3q02                "Population size in the community"
 lab var cs3q02_WIZ            "Population size in the community - winsorized"

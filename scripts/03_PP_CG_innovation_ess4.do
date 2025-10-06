@@ -386,7 +386,6 @@ replace plotarea_sr=(s3q02a*0.25)/10000 if s3q02b==6 & conv_kert_r==. & conv_ker
 
 replace plotarea_sr=(s3q02a* 204.4169)/10000 if s3q02b==7 //tilm
 replace plotarea_sr=(s3q02a*69.28191)/10000  if s3q02b==8 //medeb
-*replace plotarea_sr=pp_s3q02_a if pp_s3q02_c==9 //rope
 replace plotarea_sr=(s3q02a*6176.3808)/10000 if s3q02b==10 //ermija
 
 
@@ -1687,11 +1686,6 @@ foreach i of varlist *impcr71{
 foreach i of varlist *impcr72{
 	lab var `i' "Improved   COFFEE-SR"
 	}
-	/*
-foreach i of varlist *impcr108{
-	lab var `i' "Improved   AMBOSHIKA-SR"
-	}
-*/
 
 lab var ead_treadle     "Treadle pump" 
 lab var ead_motorpump   "Motor pump"

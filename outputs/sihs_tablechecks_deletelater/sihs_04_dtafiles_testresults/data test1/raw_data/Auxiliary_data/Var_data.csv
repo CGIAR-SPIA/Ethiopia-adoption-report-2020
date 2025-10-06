@@ -1,0 +1,51 @@
+subbinReferences,Crop,Variety_type,Crop_specific_variety_type,Year_release,Def1_status,Def2_status,Def3_status,Def4_status,DTMZ_status,QPM_status,CG_Source,Exotic_Source
+RLi-AI-70_A,Sorghum,Obsolete' improved,NA,1970,Non-improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-DANO-C,Sorghum,Improved,NA,2006,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-CHEMEDA-A,Sorghum,Improved,NA,2013,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-MISKIR-B,Sorghum,Improved,NA,2007,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-ASSOSA-1_2_A,Sorghum,Improved,NA,2015,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-MURYA-1_A,Sorghum,Improved,NA,2000,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-BIRHAN-I-A,Sorghum,Improved,NA,2002,Improved,NA,Improved,Improved,NA,No,Yes,Yes
+RLi-ESH-I-B,Sorghum,Improved,NA,2009,Improved,NA,Improved,Improved,NA,No,Yes,Yes
+RLi-LALO-A,Sorghum,Improved,NA,2006,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-FENDISHA-1_A,Sorghum,Improved,NA,2015,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-GEMEDI-A,Sorghum,Improved,NA,2013,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-GIRMA-I-A,Sorghum,Improved,NA,2007,Improved,NA,Improved,Non-improved,NA,No,No,No
+RLi-MELAKA-A,Sorghum,Improved,NA,2009,Improved,NA,Improved,Improved,NA,No,No,No
+RLi-ADAKURA-2A,Sorghum,Improved,NA,2015,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RM0512017,Maize,Improved,OPV,2001,Improved,NA,Improved,Improved,No,No,Yes,Yes
+KULANI,Maize,Improved,OPV,1995,Improved,NA,Improved,Improved,No,No,Yes,Yes
+RM0042017,Maize,Improved,OPV,1995,Improved,NA,Improved,Improved,No,No,Yes,Yes
+RM0482017,Maize,Improved,Hybrid,1993,Improved,NA,Improved,Improved,No,No,Yes,Yes
+RM0292017,Maize,Improved,Hybrid,2011,Improved,NA,Improved,Improved,Yes,No,Yes,Yes
+RM0312017,Maize,Improved,Hybrid,1995,Improved,NA,Non-improved,Non-improved,No,No,No,No
+RM0202017,Maize,Improved,Hybrid,2006,Improved,NA,Non-improved,Improved,No,No,No,Yes
+RM0232017,Maize,Improved,Hybrid,2012,Improved,NA,Non-improved,Improved,No,No,No,Yes
+MELKASSA-2,Maize,Improved,OPV,2004,Improved,NA,Non-improved,Non-improved,No,No,No,No
+RM0142017,Maize,Improved,Hybrid,2008,Improved,NA,Non-improved,Non-improved,No,No,No,No
+GIBE1,Maize,Improved,OPV,2001,Improved,NA,Improved,Improved,No,No,Yes,Yes
+RM0472017,Maize,Improved,Hybrid,2011,Improved,NA,Improved,Improved,Yes,No,Yes,Yes
+RM0262017,Maize,Improved,OPV,1988,Improved,NA,Improved,Improved,No,No,Yes,Yes
+BH-140,Maize,Improved,OPV,1988,Improved,NA,Improved,Improved,No,No,Yes,Yes
+RM0212017,Maize,Improved,Hybrid,2015,Improved,NA,Non-improved,Improved,No,No,No,Yes
+RM0012017,Maize,Improved,Hybrid,2016,Improved,NA,Improved,Improved,No,Yes,Yes,Yes
+RM0222017,Maize,Improved,Hybrid,1995,Improved,NA,Non-improved,Improved,No,No,No,Yes
+BH-670,Maize,Improved,Hybrid,2002,Improved,NA,Non-improved,Non-improved,No,No,No,No
+RM0022017,Maize,Improved,OPV,2001,Improved,NA,Improved,Non-improved,No,No,Yes,No
+RM0062017,Maize,Improved,OPV,2013,Improved,NA,Improved,Non-improved,No,Yes,Yes,No
+RL:FELAMIT_C,Barley,Non identified improved,Food,2011,Non-improved,NA,Non-improved,Non-improved,NA,No,No,No
+RL_ESTAYSH_B,Barley,Non identified improved,Food,2004,Non-improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-ABAY-A,Barley,Non identified improved,Food,1998,Non-improved,NA,Non-improved,Non-improved,NA,No,No,No
+RL:ADENA_C,Barley,Non identified improved,Food,2016,Non-improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-mezezo a,Barley,Non identified improved,Food,2004,Non-improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-WOLELAY-B,Barley,Non identified improved,Food,2016,Non-improved,NA,Non-improved,Non-improved,NA,No,No,No
+RL:HB-1966_B,Barley,Improved,Food,2017,Improved,NA,Improved,Improved,NA,No,Yes,Yes
+RL:HB52_C,Barley,Improved,Malt,2001,Improved,NA,Non-improved,Improved,NA,No,No,Yes
+RL:MISCAL_21,Barley,Improved,Malt,2006,Improved,NA,Improved,Improved,NA,No,Yes,Yes
+RL:SETEGN_B,Barley,Improved,Food,2004,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RL:TRAVELLER_C,Barley,Improved,Malt,2013,Improved,NA,Non-improved,Improved,NA,No,No,Yes
+RL:HOLKER,Barley,Improved,Malt,1979,Improved,NA,Non-improved,Improved,NA,No,No,Yes
+RL:TILLA_C,Barley,Improved,Food,2007,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+not identified,Barley,Landrace,NA,NA,Non-improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-ABSHIR-2_A,Barley,Improved,NA,2000,Improved,NA,Non-improved,Non-improved,NA,No,No,No
+RLi-DEKEBA-A,Barley,Improved,NA,2012,Improved,NA,Non-improved,Non-improved,NA,No,No,No

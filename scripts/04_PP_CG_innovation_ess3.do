@@ -28,7 +28,7 @@ bys region zone: egen conv_`i'_z=mean(conv_`i')
 bys region: egen conv_`i'_r=mean(conv_`i')
 }
 
-save "${rawdata}${slash}Auxiliary_data${slash}ESS3_ET_local_area_unit_conversion", replace
+save "${rawdata}${slash}Auxiliary_data${slash}ESS3_ET_local_area_unit_conversion", replace 
 
 ********************************************************************************
 * COVER - PP
@@ -49,7 +49,7 @@ duplicates drop household_id household_id2 rural pw_w3 ea_id saq01 saq02 saq03 s
 
 tempfile w3_coverPP
 save `w3_coverPP'
-save "${data}${slash}w3_coverpp", replace
+save "${data}${slash}w3_coverpp", replace 										
 
 
 ********************************************************************************
@@ -142,9 +142,9 @@ collapse (max) title fowner frsell (firstnm) household_id pw_w3, by(household_id
 lab var frsell "At lest 1 female hh-member has the right to sell the parcel"
 lab var fowner "At lest 1 female hh-member listed as owner in parcel title"
 lab var title "HH has title for the parcel"
-save "${data}${slash}ess3_pp_hhlevel_parcel", replace
+save "${data}${slash}ess3_pp_hhlevel_parcel", replace 							
 restore
-save "${data}${slash}w3_sect2_pp_parcel", replace
+save "${data}${slash}w3_sect2_pp_parcel", replace 								
 
 
 
@@ -223,9 +223,6 @@ replace affor=1 if (pp_s3q33==3)               & (pp_s3q03>=1 & pp_s3q03<=5)
 g       ploc=.
 replace ploc=0 if (pp_s3q33!=. | pp_s3q32==2) & (pp_s3q03>=1 & pp_s3q03<=5)
 replace ploc=1 if (pp_s3q33==4)               & (pp_s3q03>=1 & pp_s3q03<=5)
-
-
-
 
 
 * CA with minimum tillage
@@ -400,7 +397,6 @@ replace plotarea_sr=(pp_s3q02_a*conv_kert_r)/10000 if pp_s3q02_c==6 & conv_kert_
 
 replace plotarea_sr=(pp_s3q02_a* 204.4169)/10000 if pp_s3q02_c==7 //tilm
 replace plotarea_sr=(pp_s3q02_a*69.28191)/10000 if pp_s3q02_c==8 //medeb
-*replace plotarea_sr=pp_s3q02_a if pp_s3q02_c==9 //rope
 replace plotarea_sr=(pp_s3q02_a*6176.3808)/10000 if pp_s3q02_c==10 //ermija
 
 lab var plotarea_sr "Plot area in HA - Self-reported"
@@ -509,7 +505,7 @@ lab var soiler "Plot prevented from soil erosion"
 preserve
 keep holder_id household_id household_id2 rural pw_w3 parcel_id field_id ea_id region zone woreda kebele subcity kebele pp_saq07 pp_s3q00 pp_s3q0a pp_s3q01 rdisp treadle motorpump rotlegume cresidue1 cresidue2 mintillage zerotill swc terr wcatch affor ploc consag1 consag2 bbm hh_plot_irr_nb hh_plot_nb hh_plot_cult_nb hh_plot_uses_nb hh_plot_eros_nb hh_plot_cplus_nb plotarea* fplotm extprog irr irrm1 urea dap nps othfert manure hiredlab lprep soiler saq01 plotirr
 
-save "${data}${slash}ess3_pp_nrm_plot", replace 
+save "${data}${slash}ess3_pp_nrm_plot", replace 								
 restore
 
 * COLLAPSE AT HH-LEVEL
@@ -1100,7 +1096,7 @@ lab var fieldp		"Field peas"
 
 
 
-save "${data}${slash}ess3_pp_cropvar_plot", replace
+save "${data}${slash}ess3_pp_cropvar_plot", replace								
 restore
 
 
@@ -1534,7 +1530,7 @@ g po_`i'_r=`i'_r if ls_sec_8_type_code==4 & ls_sec_8_1q01>0 & ls_sec_8_1q01!=.  
 
 * Plot level data - Animal Agriculture
 preserve
-save "${data}${slash}ess3_pp_livestock_plot", replace
+save "${data}${slash}ess3_pp_livestock_plot", replace							
 restore
 
 * Collapse at the hh-level
@@ -1693,8 +1689,8 @@ replace `var'=`var'*100
 * Cleaning intermediate variables
 drop impcr*max impcr*_sum*
 
-save "${data}${slash}ess3_pp_hh", replace
-save "${data}${slash}wave3_hh", replace
+save "${data}${slash}ess3_pp_hh", replace										
+save "${data}${slash}wave3_hh", replace											
 
 ********************************************************************************
 * EA - LEVEL ANALYSIS *
@@ -1794,9 +1790,6 @@ replace sh_plotea_`i'_r=. if ead_`i'_r==0 & rural==1
 
 replace ead_`i' =0        if ead_`i'==.
 replace sh_ea_`i'=.       if ead_`i'==0 
-
-*replace ead_`i'_r =0      if ead_`i'_r ==. & rural==1
-*replace sh_ea_`i'_r=.     if ead_`i'_r==0  & rural==1
 
 
 }
@@ -2079,8 +2072,8 @@ drop if _m==2
 drop _merge
 
 
-save "${data}${slash}wave3_ea", replace
-save "${data}${slash}ess3_pp_ea", replace
+save "${data}${slash}wave3_ea", replace											
+save "${data}${slash}ess3_pp_ea", replace										
 
 ********************************************************************************
 * MERGING PLOT LEVEL DATA
@@ -2094,5 +2087,5 @@ merge m:1 holder_id household_id2 parcel_id using "${data}${slash}w3_sect2_pp_pa
 drop if _m==2
 drop _merge
 
-save "${data}${slash}w3_plotlevel_pp", replace
+save "${data}${slash}w3_plotlevel_pp", replace									
 

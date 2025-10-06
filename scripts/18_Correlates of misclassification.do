@@ -25,7 +25,6 @@ replace cs4q15wiz=0  if cs4q14==1
 replace csdq53wiz=0  if cs4q52==1 
 
 rename  total_cons_ann_win totconswin
-*drop maize_tp2 maize_tn2 maize_fp2 maize_fn2 maize_tp3 maize_tn3 maize_fp3 maize_fn3
 foreach i in  maize_tp2 maize_tn2 maize_fp2 maize_fn2 {
 rename `i'c `i'
 }
