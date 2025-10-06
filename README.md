@@ -69,6 +69,6 @@ Panel on Impact Assessment (SPIA).
 
 SPIA encourages fair use of this material under the terms of Creative Commons Attribution 4.0 (BY-NC-SA 4.0) provided proper citation is made.
 
-# Funding Acknowledgments
+#  Acknowledgments
 
 This work was supported by the CGIAR Standing Panel on Impact Assessment (SPIA) in partnership with the Ethiopian Central Statistical Agency and the World Bank Living Standards Measurement Study team.
