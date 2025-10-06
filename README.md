@@ -13,9 +13,9 @@ The repo includes the following folders:
 ```
 ethiopia-adoption-report-2020/
 ├── data/
-│   ├── raw_data/          # Original ESS survey data  ???? was there any pre-preparation we also have other types like auxillary was this part of ESS 
-│   ├── processed_data/    # Cleaned and merged datasets ???
-│   └── report_data/         # DNA fingerprinting data ???
+│   ├── raw_data/          # Public ESS survey data  
+│   ├── processed_data/    # 
+│   └── report_data/         # DNA fingerprinting data 
 ├── scripts/
 │   ├── 1_master.do       # Master Stata script (runs all the do files scripts)
 │   ├── do_files/         # Individual Stata analysis scripts
