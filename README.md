@@ -13,9 +13,9 @@ The repo includes the following folders:
 ```
 ethiopia-adoption-report-2020/
 ├── data/
-│   ├── raw_data/          # Original ESS survey data  ???? was there any pre-preparation we also have other types like auxillary was this part of ESS 
-│   ├── processed_data/    # Cleaned and merged datasets ???
-│   └── report_data/         # DNA fingerprinting data ???
+│   ├── raw_data/          # Public ESS survey data  
+│   ├── processed_data/    # 
+│   └── report_data/         # DNA fingerprinting data 
 ├── scripts/
 │   ├── 1_master.do       # Master Stata script (runs all the do files scripts)
 │   ├── do_files/         # Individual Stata analysis scripts
@@ -69,6 +69,6 @@ Panel on Impact Assessment (SPIA).
 
 SPIA encourages fair use of this material under the terms of Creative Commons Attribution 4.0 (BY-NC-SA 4.0) provided proper citation is made.
 
-# Funding Acknowledgments
+#  Acknowledgments
 
 This work was supported by the CGIAR Standing Panel on Impact Assessment (SPIA) in partnership with the Ethiopian Central Statistical Agency and the World Bank Living Standards Measurement Study team.
