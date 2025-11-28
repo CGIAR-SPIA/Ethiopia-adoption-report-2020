@@ -292,6 +292,12 @@ matrix colnames Alt = "Mean" "SE" "Min" "Max" "N"
 
 matrix list Alt
 
+local rname ""
+foreach var in hhd_livIA hhd_cross_largerum hhd_grass hhd_cross_smallrum hhd_cross_poultry hhd_ofsp hhd_awassa83 {
+    local lbl : variable label `var'
+    local rname `"  `rname'   "`lbl'" "'		
+}
+
 #delimit;
 xml_tab Alt,  save("$table${slash}Sec6_ESS4.xml") append sheet("Table 1_hh_alt", nogridlines)  
 rnames(`rname' "Total No. of obs. per region") cnames(`cnames') ceq("National" "National" "National" "National" "National") showeq 	 

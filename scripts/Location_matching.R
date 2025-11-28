@@ -3,7 +3,6 @@
 # Title: "Matching ESS EAs to the closest location of CGIAR research activities per innovation"
 # Author email: "f.kosmowski@cgiar.org"
 # Date: "June 2020"
-# last editted by M.Kirinyet@cgiar.org on 23/09/2025
 # ---
 
 
@@ -423,14 +422,14 @@ sect3_pp_w4 <- read_dta ("data/raw_data/ESS4_2018-19/Data/PP/sect3_pp_w4.dta")
 
 sect3_pp_w4 <- sect3_pp_w4[!duplicated(sect3_pp_w4$ea_id), ] 
 sect3_pp_w4 <- sect3_pp_w4 [, c(1,5)]
-GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster.dta')
-GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster.dta') 
-GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster.dta') 
+GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster_anonymized.dta')
+GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster_anonymized.dta') 
+GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster_anonymized.dta') 
 
 GPS <- rbind (GPS1, GPS2, GPS3); rm (GPS1, GPS2, GPS3)
-GPS <- GPS [, c(1,17,18,20)]
+GPS <- GPS [, c(1,17,197,198)]
 
-GPS <- merge (sect3_pp_w4, GPS, all.x=TRUE); GPS <- GPS[!is.na (GPS$s3q09__Latitude), ]; GPS <- GPS[!duplicated(GPS$ea_id), ] 
+GPS <- merge (sect3_pp_w4, GPS, all.x=TRUE); GPS <- GPS[!is.na (GPS$s3q09__Latitude__anonymized), ]; GPS <- GPS[!duplicated(GPS$ea_id), ] 
 GPS$ea_id <- as.numeric(GPS$ea_id)
 
 # Note: replace the 10 lines above by ESS4 EA-level GPS coordinates once released
@@ -453,7 +452,7 @@ zones <- st_set_crs(zones, 4326)   # EPSG:4326 is WGS84
 Fig6 <- ggplot() +
   geom_sf(data = zones, colour = "black", fill = NA) +
   geom_point(data = Maps_4[!is.na(Maps_4$sh_ea_poultry_k), ],
-             aes(x = s3q09__Longitude, y = s3q09__Latitude),
+             aes(x = s3q09__Longitude__anonymized, y = s3q09__Latitude__anonymized),
              size = 1.8, color = '#4E84C4') +
   geom_point(data = Maps_3[!is.na(Maps_3$sh_ea_poultry), ],
              aes(x = lon_dd_mod, y = lat_dd_mod),
@@ -474,9 +473,9 @@ data <- merge (data, cc, by.x='ID', by.y='sccq05', all.x=TRUE) # Croproster_12.0
 
 
 # Geographic distribution of samples 
-GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster.dta')
-GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster.dta') 
-GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster.dta') 
+GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster_anonymized.dta')
+GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster_anonymized.dta') 
+GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster_anonymized.dta') 
 
 GPS <- rbind (GPS1, GPS2, GPS3); rm (GPS1, GPS2, GPS3)
 
@@ -485,8 +484,8 @@ GPS$Field_ID <- paste (GPS$interview__id, GPS$Parcelroster__id, GPS$Fieldroster_
 data <- merge (data, GPS, by='Field_ID', all.x=TRUE) 
 # Note: replace the 10 lines above by ESS4 EA-level GPS coordinates
 
-table (data$s3q09__Latitude) # 
-table (data$s3q09__Longitude)
+table (data$s3q09__Latitude__anonymized) # 
+table (data$s3q09__Longitude__anonymized)
 
 # Maps per variety
 
@@ -502,7 +501,7 @@ zones_df <- zones %>%
 data.HB <- data[data$subbinReferences == 'RL:HB-1966_B', ]
 Fig7 <- ggplot() +
   geom_sf(data = zones, colour = "black", fill = NA) +
-  geom_point(data = data.HB, aes(x = s3q09__Longitude, y = s3q09__Latitude), 
+  geom_point(data = data.HB, aes(x = s3q09__Longitude__anonymized, y = s3q09__Latitude__anonymized), 
              size = 1.5, color = 'blue') +
   xlab(' ') + ylab(' ') +  
   theme_minimal()  
@@ -530,9 +529,9 @@ cc$sccq05 <- as.numeric(cc$sccq05)
 data <- merge (data, cc, by.x='ID', by.y='sccq05', all.x=TRUE) 
 
 # Geographic distribution of samples 
-GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster.dta')
-GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster.dta') 
-GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster.dta') 
+GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster_anonymized.dta')
+GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster_anonymized.dta') 
+GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster_anonymized.dta') 
 
 GPS <- rbind (GPS1, GPS2, GPS3); rm (GPS1, GPS2, GPS3)
 data$Field_ID <- paste (data$interview__id, data$Parcelroster__id, data$Fieldroster__id, sep='.', collapse=NULL)
@@ -540,8 +539,8 @@ GPS$Field_ID <- paste (GPS$interview__id, GPS$Parcelroster__id, GPS$Fieldroster_
 data <- merge (data, GPS, by='Field_ID', all.x=TRUE) 
 # Note: replace the 10 lines above by ESS4 EA-level GPS coordinates once released
 
-table (data$s3q09__Latitude) # 
-table (data$s3q09__Longitude)
+table (data$s3q09__Latitude__anonymized) # 
+table (data$s3q09__Longitude__anonymized)
 
 # Maps per variety
 # Read shapefile with sf (replaces readShapePoly and CRS)
@@ -562,20 +561,20 @@ ea$Both <- ifelse (ea$CG_Stats.DTMZ > 0 & ea$CG_Stats.nonDTMZ > 0, 1, 0)
 ea$CG_Stats.DTMZ <- ifelse (ea$Both > 0, 0, ea$CG_Stats.DTMZ)
 ea$CG_Stats.nonDTMZ <- ifelse (ea$Both > 0, 0, ea$CG_Stats.nonDTMZ)
 
-merge <- data [, names(data) %in% c('saq03b', 's3q09__Latitude', 's3q09__Longitude')]
+merge <- data [, names(data) %in% c('saq03b', 's3q09__Latitude__anonymized', 's3q09__Longitude__anonymized')]
 ea <- merge (ea, merge, all.y=TRUE)
 ea <- ea[!duplicated(ea$saq03b), ]
 
 Fig8 <- ggplot() + 
   geom_sf(data = zones, colour = "black", fill = NA) +
   geom_point(data = ea[ea$CG_Stats.DTMZ > 0, ], 
-             aes(x = s3q09__Longitude, y = s3q09__Latitude), 
+             aes(x = s3q09__Longitude__anonymized, y = s3q09__Latitude__anonymized), 
              size = 1.5, color = 'darkgoldenrod1') +
   geom_point(data = ea[ea$CG_Stats.nonDTMZ > 0, ], 
-             aes(x = s3q09__Longitude, y = s3q09__Latitude), 
+             aes(x = s3q09__Longitude__anonymized, y = s3q09__Latitude__anonymized), 
              size = 1.5, color = 'royalblue2') + 
   geom_point(data = ea[ea$Both > 0, ], 
-             aes(x = s3q09__Longitude, y = s3q09__Latitude), 
+             aes(x = s3q09__Longitude__anonymized, y = s3q09__Latitude__anonymized), 
              size = 1.5, color = 'chartreuse3') +
   xlab(' ') + ylab(' ') +
   theme_minimal()
