@@ -63,7 +63,7 @@ set more off
 
 * a. General Directories
 
-cd "/Users/sophiasalzer/Documents/Ethiopia-adoption-report-2020" // parent directory
+cd "C:\Ethiopia-adoption-report-2020" // parent directory
 // for GitHub use if in "scripts", see below:
 	* cd ".."` // cd up one level (i.e. Ethiopia-adoption-report-2020 <- scripts)
 
@@ -85,12 +85,11 @@ global do "${dir}${slash}scripts"			// conains scripts (.do and .R)
 * data: main and sub directories
 global bigdata "${dir}${slash}data"			// contains data subfolders
 global rawdata "${bigdata}${slash}raw_data"	// contains raw data subfolder
-global data "${bigdata}${slash}report_data"	// contains report data subfolder
+global data "${bigdata}${slash}report_data"	// contains processed data for the report
 
 * subfolders in raw data subfolder 
 global raw3    "${rawdata}${slash}ESS3_2015-16${slash}Data${slash}STATA" 
 global raw4    "${rawdata}${slash}ESS4_2018-19${slash}Data" 
-global raw4new "${rawdata}${slash}ESS4_2018-19${slash}Data_new" 
 global temp    "${rawdata}${slash}temp" 
 
 * obsolete subfolders in raw data subfolder: 

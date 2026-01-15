@@ -38,7 +38,7 @@ save "${data}${slash}dashboard_locations", replace
 *ESS4 - years of education *
 ****************************
 
-use "${raw4new}${slash}HH${slash}sect2_hh_w4", clear
+use "${raw4}${slash}HH${slash}sect2_hh_w4", clear
 
 g       yrseduc=.
 replace yrseduc=0  if s2q06==0
@@ -88,7 +88,7 @@ lab var yrseduc "HH-head years of education completed"
 keep household_id individual_id yrseduc
 
 
-merge 1:1 household_id individual_id using "${raw4new}${slash}HH${slash}sect1_hh_w4"
+merge 1:1 household_id individual_id using "${raw4}${slash}HH${slash}sect1_hh_w4"
 keep if _m==3
 drop _merge
 
@@ -107,7 +107,7 @@ save `educ_w4'
 *******************************************************************************
 * HH Demo groups
 ********************************************************************************
-use "${raw4new}${slash}HH${slash}sect1_hh_w4", clear
+use "${raw4}${slash}HH${slash}sect1_hh_w4", clear
 bys household_id : egen hh_size=count(individual_id)
 
 collapse (max)   hh_size, by(household_id)
@@ -121,7 +121,7 @@ save `agegroup'
 ****************************************
 
 * Land preparation, planting, fertilizer application etc. - PP survey
-use "${raw4new}${slash}PP${slash}sect3_pp_w4", clear
+use "${raw4}${slash}PP${slash}sect3_pp_w4", clear
 
 rename s3q29a s3q29_1
 rename s3q29e s3q29_2
@@ -134,7 +134,7 @@ reshape long s3q29_, i(holder_id household_id parcel_id field_id) j(membernb)
 drop if s3q29_==.a & (s3q28==. | s3q28==0 )
 
 rename  s3q29_ s1q00
-merge m:1 holder_id household_id s1q00 using  "${raw4new}${slash}PP${slash}sect1_pp_w4"
+merge m:1 holder_id household_id s1q00 using  "${raw4}${slash}PP${slash}sect1_pp_w4"
 
 drop if _m==2
 drop _merge
@@ -184,7 +184,7 @@ save     `hhfamlab1'
 ****************************************
 
 
-use "${raw4new}${slash}LS${slash}sect8_1_ls_w4", clear
+use "${raw4}${slash}LS${slash}sect8_1_ls_w4", clear
 *Owner
 preserve
 reshape long  ls_s8_1q04_, i(holder_id household_id ls_code) j(membernb)
@@ -193,7 +193,7 @@ drop if ls_s8_1q04_==.
 drop if ls_s8_1q04_==.a
 
 rename  ls_s8_1q04_ s1q00
-merge m:1 holder_id household_id s1q00 using  "${raw4new}${slash}PP${slash}sect1_pp_w4"
+merge m:1 holder_id household_id s1q00 using  "${raw4}${slash}PP${slash}sect1_pp_w4"
 keep if _m==3
 drop _merge
 
@@ -219,7 +219,7 @@ drop if ls_s8_1q05_==.
 drop if ls_s8_1q05_==.a
 
 rename  ls_s8_1q05_ s1q00
-merge m:1 holder_id household_id s1q00 using  "${raw4new}${slash}PP${slash}sect1_pp_w4"
+merge m:1 holder_id household_id s1q00 using  "${raw4}${slash}PP${slash}sect1_pp_w4"
 
 keep if _m==3
 drop _merge
@@ -296,7 +296,7 @@ drop _m
 
 
 *Add consumption aggregates *
-merge 1:1 household_id using "${raw4new}${slash}HH${slash}cons_agg_w4"
+merge 1:1 household_id using "${raw4}${slash}HH${slash}cons_agg_w4"
 
 drop _merge
 

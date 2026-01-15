@@ -47,15 +47,11 @@ required_packages(c("readxl", "haven", "dplyr", "sp", "FNN", "ggplot2", "sf", "n
 # Set file paths
 data_dir <- "data"
 raw_data_dir <- file.path(data_dir, "raw_data")
-processed_data_dir <- file.path(data_dir, "processed")
+processed_data_dir <- file.path(data_dir, "report_data")
 dashboard_dir <- file.path(raw_data_dir, "Dashboard locations")
 ess3_dir <- file.path(raw_data_dir, "ESS3_2015-16", "Data", "STATA")
 ess4_dir <- file.path(raw_data_dir, "ESS4_2018-19", "Data", "HH")
 
-# Create processed directory if it doesn't exist
-if (!dir.exists(processed_data_dir)) {
-  dir.create(processed_data_dir, recursive = TRUE)
-}
 
 # Section 1: Load and prepare project location data ---------------------
 Innov_GPS <- read_excel(
@@ -414,7 +410,7 @@ ESS.Distances <- cbind(ESS.Distances,
                        ESS_Barley[, grep("Dist_CG_Barley|N_.*_CG_Barley", names(ESS_Barley))],
                        ESS_Sorghum[, grep("Dist_CG_Sorghum|N_.*_CG_Sorghum", names(ESS_Sorghum))])
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-write.csv(ESS.Distances, file.path('data', 'processed', 'ESS.distances.csv'))
+write.csv(ESS.Distances, file.path('data', 'report_data', 'ESS.distances.csv'))
 
 
 # Figure 6: Map of enumeration areas with at least one household adopter of poultry crossbred in 2015/16 (orange) and 2018/19 (blue) ----

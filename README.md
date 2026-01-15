@@ -13,17 +13,16 @@ The repo includes the following folders:
 ```
 ethiopia-adoption-report-2020/
 ├── data/
-│   ├── raw_data/          # Public ESS survey data  
-│   ├── processed_data/    # 
-│   └── report_data/         # DNA fingerprinting data 
+│   ├── raw_data/          # ESS survey data  
+│   └── report_data/         # contains all the procesed data 
 ├── scripts/
-│   ├── 1_master.do       # Master Stata script (runs all the do files scripts)
+│   ├── 1_master.do       # Master Stata script (runs all the do files)
 │   ├── do_files/         # Individual Stata analysis scripts
 │   ├── Tabs.R           # R script for DNA fingerprinting tables
 │   └── Location_Matching.R  # R script for spatial analysis
 ├── outputs/
-│   ├── tables/          # Generated tables (Excel format)
-│   ├── figures/         # Maps and visualizations
+│   ├── tables/          # Placeholder for generated tables (Excel format)
+│   ├── figures/         # Placeholder for generated Maps and visualizations
 └── README.md`
 ```
 Scripts Organization
@@ -50,7 +49,7 @@ Scripts Organization
   2. Open the main `master.do` file and update parent directory with your local path:
 
      `cd "YOUR/PATH/TO/Ethiopia-adoption-report-2020"`
-- **R scripts**:  run independently
+- **R scripts**:  run independently with your working directory set  to you parent directory: `cd "YOUR/PATH/TO/Ethiopia-adoption-report-2020"`
 - Tables 1, 4-8, 21, 23-27 come from external sources (**[Stocktake document - SPIA Ethiopia Report](https://cgspace.cgiar.org/items/12ee33af-4d8e-4c72-baca-599a994ecbda)**,  ESS questionnaires, variety registries in the report Appendices)
 
 # Citation
@@ -71,4 +70,4 @@ SPIA encourages fair use of this material under the terms of Creative Commons At
 
 #  Acknowledgments
 
-This work was supported by the CGIAR Standing Panel on Impact Assessment (SPIA) in partnership with the Ethiopian Central Statistical Agency and the World Bank Living Standards Measurement Study team.
+We thank the contributors acknowledged in the report, please see the report linked above.

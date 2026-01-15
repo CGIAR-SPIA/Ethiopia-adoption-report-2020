@@ -1,7 +1,7 @@
 * ESS4 - LIVESTOCK - URBAN AREA
 
-use "${raw4new}${slash}HH${slash}sect10d2_hh_w4", clear
-merge m:1 household_id livestock_cd using "${raw4new}${slash}HH${slash}sect10d1_hh_w4"
+use "${raw4}${slash}HH${slash}sect10d2_hh_w4", clear
+merge m:1 household_id livestock_cd using "${raw4}${slash}HH${slash}sect10d1_hh_w4"
 
 keep if _m==3
 drop _m

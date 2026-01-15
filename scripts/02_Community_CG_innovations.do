@@ -2,9 +2,9 @@
 *Community Irrigation Scheme * Only for rural EAs
 *ESS4
 
-use "${raw4new}${slash}COMMUNITY${slash}sect06_com_w4", clear
+use "${raw4}${slash}COMMUNITY${slash}sect06_com_w4", clear
 
-merge 1:1 ea_id using "${raw4new}${slash}COMMUNITY${slash}sect03_com_w4"
+merge 1:1 ea_id using "${raw4}${slash}COMMUNITY${slash}sect03_com_w4"
 drop _m
 
 g commirr=.

@@ -21,7 +21,7 @@ set more off
 
 {/*Demographics-sect1_hh_w4.dta*/
 
-use "${raw4new}${slash}HH${slash}sect1_hh_w4", clear
+use "${raw4}${slash}HH${slash}sect1_hh_w4", clear
 gen age_head= s1q03a if s1q01==1
 save "$temp${slash}sect1_hh_w4_demo", replace
 use "$temp${slash}sect1_hh_w4_demo", clear
@@ -39,7 +39,7 @@ save "$temp${slash}sect1_hh_w4_demohh", replace
 
 { /*Non-farm enterprise-sect12a_hh_w4*/
 
-use "${raw4new}${slash}HH${slash}sect13_hh_w4", clear
+use "${raw4}${slash}HH${slash}sect13_hh_w4", clear
 sort s13q02
 replace s13q02 = . if s13q02 ==2000000
 winsor2 s13q02 , replace cuts(1 99)
@@ -56,7 +56,7 @@ save "$temp${slash}sect13_hh_w4_offincome", replace
 
 **Asset index-sect11_hh_w4
 
-use "${raw4new}${slash}HH${slash}sect11_hh_w4", clear 
+use "${raw4}${slash}HH${slash}sect11_hh_w4", clear 
 
 rename s11q00 HHown_item
 
@@ -72,7 +72,7 @@ save "$temp${slash}sect11_hh_w4_asset", replace
 
 *** Houssing-sect10a_hh_w4
 
-use "${raw4new}${slash}HH${slash}sect10a_hh_w4", clear  
+use "${raw4}${slash}HH${slash}sect10a_hh_w4", clear  
 
 order s10aq08 s10aq09 s10aq10 s10aq12  s10aq27 s10aq21 s10aq20 s10aq06 s10aq07,after ( s10aq38 )
 order s10aq34 s10aq38,after ( s10aq07 )
@@ -100,7 +100,7 @@ save "$temp${slash}asse_index", replace
 
 ***productive-asset
 
-use "${raw4new}${slash}HH${slash}sect11_hh_w4", clear 
+use "${raw4}${slash}HH${slash}sect11_hh_w4", clear 
 
 rename s11q00 HHown_item
 
@@ -130,7 +130,7 @@ save "$temp${slash}prod-asse_index", replace
 *** merging
 {/*merging all the hh level data*/
 
-use "${raw4new}${slash}HH${slash}sect_cover_hh_w4", clear 
+use "${raw4}${slash}HH${slash}sect_cover_hh_w4", clear 
 
 merge 1:1 household_id using "$temp${slash}sect1_hh_w4_demohh.dta"
 drop _m
@@ -355,11 +355,11 @@ save "$temp${slash}HH_PP_LEVEL_DATA.dta", replace
 
 
 
-use "${raw4new}${slash}COMMUNITY${slash}sect04_com_w4.dta", clear
+use "${raw4}${slash}COMMUNITY${slash}sect04_com_w4.dta", clear
 
-merge 1:1 ea_id using "${raw4new}${slash}COMMUNITY${slash}sect06_com_w4.dta"
+merge 1:1 ea_id using "${raw4}${slash}COMMUNITY${slash}sect06_com_w4.dta"
 drop _m
-merge 1:1 ea_id using "${raw4new}${slash}COMMUNITY${slash}sect09_com_w4.dta"
+merge 1:1 ea_id using "${raw4}${slash}COMMUNITY${slash}sect09_com_w4.dta"
 drop _m
 order cs9q01 cs6q01 cs6q10 cs4q02 cs4q08 cs4q09 cs4q11 cs4q12b cs4q14 cs4q15,after ( cs9q14 )
 save "$temp${slash}community_S4_S6_S9.dta", replace

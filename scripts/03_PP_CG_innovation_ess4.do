@@ -23,7 +23,7 @@ save "${data}${slash}w4_coverHH", replace
 * COVER - PP
 ******************************************************************************** 
 
-use "${raw4new}${slash}PP${slash}sect_cover_pp_w4", clear
+use "${raw4}${slash}PP${slash}sect_cover_pp_w4", clear
 
 count //2,939
 tostring saq12, force replace
@@ -49,14 +49,14 @@ save "${data}${slash}w4_coverPP_new", replace
 ********************************************************************************
 * PP - SECT. 1
 ********************************************************************************
-use "${raw4new}${slash}PP${slash}sect1_pp_w4", clear
+use "${raw4}${slash}PP${slash}sect1_pp_w4", clear
 
 * NOTHING TO RECOVER
 
 ********************************************************************************
 * PP - SECT. 2
 ********************************************************************************
-use "${raw4new}${slash}PP${slash}sect2_pp_w4", clear
+use "${raw4}${slash}PP${slash}sect2_pp_w4", clear
 preserve
 * Parcel title
 g title=s2q03==1
@@ -67,7 +67,7 @@ reshape long s2q04b_, i(holder_id household_id parcel_id) j(membernb)
 drop if s2q04b_==.a & title==1
 rename  s2q04b_ s1q00
 * Individual characteristics
-merge m:1 holder_id household_id s1q00 using  "${raw4new}${slash}PP${slash}sect1_pp_w4"
+merge m:1 holder_id household_id s1q00 using  "${raw4}${slash}PP${slash}sect1_pp_w4"
 
 keep if _m==3
 drop _merge
@@ -94,7 +94,7 @@ reshape long s2q07_, i(holder_id household_id parcel_id) j(membernb)
 drop if s2q07_==.a & s2q06==1
 
 rename  s2q07_ s1q00
-merge m:1 holder_id household_id s1q00 using  "${raw4new}${slash}PP${slash}sect1_pp_w4"
+merge m:1 holder_id household_id s1q00 using  "${raw4}${slash}PP${slash}sect1_pp_w4"
 keep if _m==3
 
 drop _merge
@@ -163,7 +163,7 @@ save "${data}${slash}w4_sect2_pp_parcel_new", replace
 ********************************************************************************
 
 
-use "${raw4new}${slash}PP${slash}sect3_pp_w4", clear
+use "${raw4}${slash}PP${slash}sect3_pp_w4", clear
 
 count //19,339
 
@@ -421,7 +421,7 @@ replace falloq=0 if s3q05==2
 lab var falloq "Plot left fallow in the last 5 years"
 
 rename  s3q13 s1q00
- merge m:1 holder_id household_id s1q00 using  "${raw4new}${slash}PP${slash}sect1_pp_w4"
+ merge m:1 holder_id household_id s1q00 using  "${raw4}${slash}PP${slash}sect1_pp_w4"
 drop if _m==2
 drop _m
  
@@ -654,8 +654,8 @@ save     `PP_W4S3'
 * SECTION 4 - PP - CROP VARIETY
 ********************************************************************************
 
-use "${raw4new}${slash}PP${slash}sect4_pp_w4", clear
-merge m:1   holder_id household_id parcel_id field_id using "${raw4new}${slash}PP${slash}sect3_pp_w4", keepusing(s3q03 s3q03b) 
+use "${raw4}${slash}PP${slash}sect4_pp_w4", clear
+merge m:1   holder_id household_id parcel_id field_id using "${raw4}${slash}PP${slash}sect3_pp_w4", keepusing(s3q03 s3q03b) 
 keep if _m==3
 drop _merge
 *ONLY cultivated plots
@@ -1165,7 +1165,7 @@ save `pp_w4s4'
 ********************************************************************************
 *** LS - Sec.8_1 - Crossbred animals
 ********************************************************************************
-use "${raw4new}${slash}LS${slash}sect8_1_ls_w4", clear
+use "${raw4}${slash}LS${slash}sect8_1_ls_w4", clear
 
 g       ls_type=1 if ls_code>=1 & ls_code<=6
 replace ls_type=2 if ls_code==7 | ls_code==8
@@ -1175,10 +1175,10 @@ replace ls_type=5 if ls_code>=13 & ls_code<=15
 replace ls_type=6 if ls_code==16
 
 
-merge m:1 household_id ls_type holder_id using "${raw4new}${slash}LS${slash}sect8_3_ls_w4"
+merge m:1 household_id ls_type holder_id using "${raw4}${slash}LS${slash}sect8_3_ls_w4"
 drop _merge
 
-merge 1:1 household_id ls_code holder_id using "${raw4new}${slash}LS${slash}sect8_4_ls_w4"
+merge 1:1 household_id ls_code holder_id using "${raw4}${slash}LS${slash}sect8_4_ls_w4"
 drop _merge
 
 
