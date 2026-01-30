@@ -1,7 +1,7 @@
 # Ethiopia-adoption-report-2020
 Welcome to this repository, which contains the replication files for **[Shining a Brighter Light: Comprehensive Evidence on Adoption and Diffusion of CGIAR-Related Innovations in Ethiopia](https://iaes.cgiar.org/spia/publications/shining-brighter-light-comprehensive-evidence-adoption-and-diffusion-cgiar)** (SPIA Synthesis Report, October 2020) by Frederic Kosmowski, Solomon Alemu, Paola Mallia, James Stevenson, and Karen Macours.
 
-This repository provides the code and supporting data needed to reproduce the tables and figures in the Ethiopia synthesis report. Using data from the Ethiopian Socioeconomic Survey (ESS), the research documents adoption patterns across 19 innovations spanning:
+This repository provides the code and supporting data needed to reproduce the tables and figures in the Ethiopia synthesis report. Using data from the Ethiopian Socioeconomic Survey (ESS), the research documents adoption patterns across innovations spanning:
 
 - Animal agriculture
 - Crop germplasm improvement
@@ -62,11 +62,6 @@ Panel on Impact Assessment (SPIA).
 # Contact & Support
 
 - Primary Contact: SPIA (spia@cgiar.org) 
-- Data Questions: Refer to original ESS documentation e.g., **[Socioeconomic Survey 2018-2019](https://microdata.worldbank.org/index.php/catalog/3823/study-description)** 
-
-# Permissions/Access 
-
-SPIA encourages fair use of this material under the terms of Creative Commons Attribution 4.0 (BY-NC-SA 4.0) provided proper citation is made.
 
 #  Acknowledgments
 
