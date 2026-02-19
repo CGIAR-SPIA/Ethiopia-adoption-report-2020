@@ -374,7 +374,7 @@ save "${data}${slash}ess4_pp_cov_new", replace // HH-level
 ********************************************************************************
 * PLOT LEVEL - ess4
 ********************************************************************************
-use "${cov4plot}${slash}Mereged_PP_data_2018", clear // Solomon data
+use "${cov4plot}${slash}Merged_PP_data_2018", clear // Solomon data
 rename Parcelroster__id parcel_id	
 rename Fieldroster__id field_id
 

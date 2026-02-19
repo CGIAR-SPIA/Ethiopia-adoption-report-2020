@@ -555,7 +555,7 @@ save "${data}${slash}ess3_pp_cov", replace
 ********************************************************************************
 
 
-use "${cov3plot}${slash}Mereged_plot_level_data", clear 
+use "${cov3plot}${slash}Merged_plot_level_data", clear 
 keep dist_household plot_srtmslp plot_srtm plot_twi holder_id household_id household_id2 rural pw_w3 parcel_id field_id pp_s3q091 pp_s3q092 pp_s3q093 pp_s3q03c fied_prpa1 fied_prpa2 fied_prpa3 fied_prpa4 pp_s4q05 pp_s4q06 pp_s4q07 
 lab var pp_s3q091  "Field appearance: Flat"
 lab var pp_s3q092  "Field appearance: Sloppy - Moderate"
@@ -574,12 +574,12 @@ lab var pp_s4q07   "Incidence of fungicide"
 duplicates drop dist_household plot_srtmslp plot_srtm plot_twi holder_id household_id household_id2 rural pw_w3 parcel_id field_id, force
 
 
-save "${data}${slash}Mereged_plot_level_data_final", replace
+save "${data}${slash}Merged_plot_level_data_final", replace
 
 
 use "${data}${slash}w3_plotlevel_pp", clear
 
-merge 1:1 household_id2 holder_id parcel_id field_id  using "${data}${slash}Mereged_plot_level_data_final" 
+merge 1:1 household_id2 holder_id parcel_id field_id  using "${data}${slash}Merged_plot_level_data_final" 
 
 
 drop _merge
