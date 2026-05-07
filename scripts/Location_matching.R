@@ -414,24 +414,20 @@ write.csv(ESS.Distances, file.path('data', 'report_data', 'ESS.distances.csv'))
 
 
 # Figure 6: Map of enumeration areas with at least one household adopter of poultry crossbred in 2015/16 (orange) and 2018/19 (blue) ----
-sect3_pp_w4 <- read_dta ("data/raw_data/ESS4_2018-19/Data/PP/sect3_pp_w4.dta")
-
-sect3_pp_w4 <- sect3_pp_w4[!duplicated(sect3_pp_w4$ea_id), ] 
-sect3_pp_w4 <- sect3_pp_w4 [, c(1,5)]
-GPS1 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 1 Fieldroster_anonymized.dta')
-GPS2 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 2 Fieldroster_anonymized.dta') 
-GPS3 <- read.dta13 ('data/raw_data/ESS4_2018-19/Data/PP/Version 3 Fieldroster_anonymized.dta') 
-
-GPS <- rbind (GPS1, GPS2, GPS3); rm (GPS1, GPS2, GPS3)
-GPS <- GPS [, c(1,17,197,198)]
-
-GPS <- merge (sect3_pp_w4, GPS, all.x=TRUE); GPS <- GPS[!is.na (GPS$s3q09__Latitude__anonymized), ]; GPS <- GPS[!duplicated(GPS$ea_id), ] 
-GPS$ea_id <- as.numeric(GPS$ea_id)
-
-# Note: replace the 10 lines above by ESS4 EA-level GPS coordinates once released
 
 Maps_4 <- read.csv ("data/raw_data/Auxiliary_data/ESS4_ea level_MAPS.csv") 
-Maps_4 <- merge (Maps_4, GPS, all.x=TRUE); #Maps_4 <- Maps_4[!duplicated(Maps_4$ea_id), ] 
+HouseholdGeovars_Y4 <- read_dta("data/raw_data/ESS4_2018-19/Data/HH/ETH_HouseholdGeovariables_Y4.dta")
+HouseholdGeovars_Y4 <- HouseholdGeovars_Y4 [, c(2,41,42)]
+HouseholdGeovars_Y4$ea_id <- as.numeric(HouseholdGeovars_Y4$ea_id)
+HouseholdGeovars_Y4 <- HouseholdGeovars_Y4[!duplicated(HouseholdGeovars_Y4$ea_id), ] 
+
+Maps_4 <- merge (HouseholdGeovars_Y4, Maps_4, all.y=TRUE)
+
+zones <- st_read("data/raw_data/Dashboard locations/Zones_Level_2.shp")
+zones <- st_set_crs(zones, 4326)   # EPSG:4326 is WGS84
+
+Maps_4 <- read.csv ("data/raw_data/Auxiliary_data/ESS4_ea level_MAPS.csv") 
+Maps_4 <- merge (HouseholdGeovars_Y4, Maps_4, all.x=TRUE); #Maps_4 <- Maps_4[!duplicated(Maps_4$ea_id), ] 
 
 # Get ESS3 GPS coordinates
 Maps_3 <- read.csv ("data/raw_data/Auxiliary_data/ESS3_ea level_MAPS.csv") 
@@ -448,13 +444,22 @@ zones <- st_set_crs(zones, 4326)   # EPSG:4326 is WGS84
 Fig6 <- ggplot() +
   geom_sf(data = zones, colour = "black", fill = NA) +
   geom_point(data = Maps_4[!is.na(Maps_4$sh_ea_poultry_k), ],
-             aes(x = s3q09__Longitude__anonymized, y = s3q09__Latitude__anonymized),
+             aes(x = lon_mod, y = lat_mod),
              size = 1.8, color = '#4E84C4') +
   geom_point(data = Maps_3[!is.na(Maps_3$sh_ea_poultry), ],
              aes(x = lon_dd_mod, y = lat_dd_mod),
              size = 1.8, color = '#D16103') +
   xlab(" ") + ylab(" ")
 
+# Define title
+fig_title <- "figure6"
+
+# Save 
+ggsave(
+  filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
+  plot = Fig6,
+  width = 8, height = 6, dpi = 300
+)
 # Figure 7: Map of enumeration areas with at least one adopter of HB-1966 barley variety ----
 data <- read.csv('data/raw_data/Auxiliary_data/DNA_data_reports.csv') # Sorghum ID, Purity, DNA
 cc <- read_dta("data/raw_data/ESS4_2018-19/Data/PP/Croproster_12.02.dta") # S4 + crop cut data
@@ -491,9 +496,9 @@ zones_df <- zones %>%
   st_coordinates() %>%
   as.data.frame() %>%
   rename(long = X, lat = Y) %>%
-  mutate(group = paste(L2, L1, sep = "."))  # This creates unique groups per polygon
+  mutate(group = paste(L2, L1, sep = "."))  
 
-# Your plotting code remains the same
+#  HB-1966
 data.HB <- data[data$subbinReferences == 'RL:HB-1966_B', ]
 Fig7 <- ggplot() +
   geom_sf(data = zones, colour = "black", fill = NA) +
@@ -502,10 +507,9 @@ Fig7 <- ggplot() +
   xlab(' ') + ylab(' ') +  
   theme_minimal()  
 
-# Define your title
 fig_title <- "figure7"
 
-# Save using the cleaned title
+# Save 
 ggsave(
   filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
   plot = Fig7,
@@ -575,10 +579,10 @@ Fig8 <- ggplot() +
   xlab(' ') + ylab(' ') +
   theme_minimal()
 
-# Define your title
+# Define title
 fig_title <- "figure8"
 
-# Save using the cleaned title
+# Save 
 ggsave(
   filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
   plot = Fig8,

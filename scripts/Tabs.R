@@ -58,7 +58,7 @@ table10_data <- merge(barley_df, B_variety_info,
                       by.x = "Variety", by.y = "subbinReferences", 
                       all.x = TRUE)
 
-# Clean variety names - Step by step approach
+
 table10_data$variety_clean <- as.character(table10_data$Variety)
 
 # Remove prefixes in sequence
@@ -69,14 +69,14 @@ table10_data$variety_clean <- gsub("_[A-Z]$", "", table10_data$variety_clean)
 table10_data$variety_clean <- gsub("_C$", "", table10_data$variety_clean)
 table10_data$variety_clean <- gsub("_B$", "", table10_data$variety_clean)
 
-# Convert to proper title case and handle special cases
+
 table10_data$variety_clean <- tools::toTitleCase(tolower(table10_data$variety_clean))
 
-# Fix specific formatting issues with single gsub calls
+
 table10_data$variety_clean <- gsub("Miscal_21", "Miscal-21", table10_data$variety_clean)
 table10_data$variety_clean <- gsub("Abay-A", "Abay", table10_data$variety_clean)
 
-# Sort by sample size
+
 table10_data <- table10_data[order(-table10_data$N), ]
 
 # Create final table
@@ -276,10 +276,10 @@ combined_plot <- grid.arrange(
   ncol = 1
 )
 
-# Define your title
+# Define title
 fig_title <- "Figure 4"
 
-# Save using the cleaned title
+# Save 
 ggsave(
   filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
   plot = combined_plot,
@@ -310,10 +310,10 @@ figure9 <- ggplot(data = Abs_data, aes(reorder(Innovation, N2), y = N2)) +
 
 print(figure9)
 
-# Define your title
+# Define title
 fig_title <- "figure9"
 
-# Save using the cleaned title
+# Save 
 ggsave(
   filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
   plot = figure9,
