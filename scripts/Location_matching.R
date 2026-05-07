@@ -27,10 +27,6 @@
      # N_100_CG_LargeR = N area of activities within a 100km radius
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Clears the workspace and lists files 
-rm(list = ls())
-list.files()
-
 # Required package handling. 
 required_packages <- function(packages) {
   for (pkg in packages) {
@@ -69,7 +65,6 @@ Innov_GPS$CGcore[Innov_GPS$CGinovation %in% c('Large ruminants crossbred', 'Poul
 Innov_GPS$CGcore[Innov_GPS$CGinovation %in% c('Avocado trees', 'Conservation Agriculture', 'Watershed SLM')] <- 'c) Natural Resource Management'
 Innov_GPS$CGcore[Innov_GPS$CGinovation %in% c('DTMZ varieties', 'Improved sorghum varieties', 'NuME varieties', 'OFSP', 'PPP for barley seed dissemination')] <- 'b) Crop germplasm improvement'
 
-# Table: Overview of georeferenced location collected
 table(Innov_GPS$CGinovation)
 
 # Section 2: Load and prepare ESS GPS data -------------------------------
@@ -77,7 +72,7 @@ table(Innov_GPS$CGinovation)
 # Load ESS3 GPS data 
 ESS3_geo <- read_dta(file.path(ess3_dir, "ETH_HouseholdGeovars_y3.dta"))
 
-# Create unique EA coordinates 
+# EA coordinates 
 ESS_GPS_ori <- ESS3_geo %>%
   group_by(ea_id2) %>%
   summarise(
@@ -86,7 +81,7 @@ ESS_GPS_ori <- ESS3_geo %>%
     .groups = 'drop'
   )
 
-# Rename columns to match what the script expects
+# Rename 
 ESS_GPS_ori <- ESS_GPS_ori %>%
   rename(
     ea_id = ea_id2,
@@ -94,11 +89,11 @@ ESS_GPS_ori <- ESS_GPS_ori %>%
     s3q09__Longitude = lon_dd_mod
   )
 
-# Create the ESS_GPS dataset for spatial operations
+# ESS_GPS dataset for spatial operations
 ESS_GPS <- ESS_GPS_ori
 coordinates(ESS_GPS) <- ~ s3q09__Longitude + s3q09__Latitude
 
-# Load ESS4 zone data for additional geographic information
+# ESS4 zone data 
 zone.dat <- read_dta(file.path(ess4_dir, "sect_cover_hh_w4.dta"))
 zone.dat <- zone.dat[, c(2, 5, 6, 7)]
 zone.dat <- zone.dat[!duplicated(zone.dat$ea_id), ]
@@ -109,14 +104,13 @@ Innov_GPS$x_c <- as.numeric(Innov_GPS$x_c)
 Innov_GPS$y_c <- as.numeric(Innov_GPS$y_c)
 Innov_GPS <- Innov_GPS[!is.na(Innov_GPS$x_c) & !is.na(Innov_GPS$y_c), ]
 
-# Check what we have
 cat("Number of ESS EAs with coordinates:", nrow(ESS_GPS), "\n")
 cat("Number of CGIAR project locations:", nrow(Innov_GPS), "\n")
 
 # Section 3: Mapping ------------------------------------------------------
 
 # Load and prepare administrative boundaries
-Sys.setenv(SHAPE_RESTORE_SHX = "YES") # Fix for incomplete shapefiles
+Sys.setenv(SHAPE_RESTORE_SHX = "YES") 
 zones <- st_read(file.path(dashboard_dir, "Zones_Level_2.shp"))
 st_crs(zones) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
 
@@ -136,10 +130,10 @@ Figure5 <- ggplot() +
 
 print(Figure5)
 
-# Define your title
+# Define title
 fig_title <- "figure5"
 
-# Save using the cleaned title
+# Save 
 ggsave(
   filename = file.path("outputs", "figures", paste0(fig_title, ".png")),
   plot = Figure5,
@@ -393,7 +387,7 @@ names(Innov_Barley)[2] <- "Dist_CG_Barley"
 Innov_Barley$Dist_CG_Barley <- Innov_Barley$Dist_CG_Barley * 110.56
 ESS_Barley <- cbind(ESS_GPS_ori, Innov_Barley)
 
-# create the final dataset using column names 
+# create the final dataset 
 ESS.Distances <- ESS_GPS_ori
 
 # add each innovation's data by name 
@@ -423,12 +417,6 @@ HouseholdGeovars_Y4 <- HouseholdGeovars_Y4[!duplicated(HouseholdGeovars_Y4$ea_id
 
 Maps_4 <- merge (HouseholdGeovars_Y4, Maps_4, all.y=TRUE)
 
-zones <- st_read("data/raw_data/Dashboard locations/Zones_Level_2.shp")
-zones <- st_set_crs(zones, 4326)   # EPSG:4326 is WGS84
-
-Maps_4 <- read.csv ("data/raw_data/Auxiliary_data/ESS4_ea level_MAPS.csv") 
-Maps_4 <- merge (HouseholdGeovars_Y4, Maps_4, all.x=TRUE); #Maps_4 <- Maps_4[!duplicated(Maps_4$ea_id), ] 
-
 # Get ESS3 GPS coordinates
 Maps_3 <- read.csv ("data/raw_data/Auxiliary_data/ESS3_ea level_MAPS.csv") 
 HouseholdGeovars_Y2 <- read_dta("data/raw_data/ESS2_2013-14/Data/STATA/Pub_ETH_HouseholdGeovars_Y2.dta")
@@ -439,7 +427,7 @@ HouseholdGeovars_Y2 <- HouseholdGeovars_Y2[!duplicated(HouseholdGeovars_Y2$ea_id
 Maps_3 <- merge (HouseholdGeovars_Y2, Maps_3, all.y=TRUE)
 
 zones <- st_read("data/raw_data/Dashboard locations/Zones_Level_2.shp")
-zones <- st_set_crs(zones, 4326)   # EPSG:4326 is WGS84
+zones <- st_set_crs(zones, 4326)   
 
 Fig6 <- ggplot() +
   geom_sf(data = zones, colour = "black", fill = NA) +
@@ -460,6 +448,7 @@ ggsave(
   plot = Fig6,
   width = 8, height = 6, dpi = 300
 )
+
 # Figure 7: Map of enumeration areas with at least one adopter of HB-1966 barley variety ----
 data <- read.csv('data/raw_data/Auxiliary_data/DNA_data_reports.csv') # Sorghum ID, Purity, DNA
 cc <- read_dta("data/raw_data/ESS4_2018-19/Data/PP/Croproster_12.02.dta") # S4 + crop cut data
@@ -543,7 +532,6 @@ table (data$s3q09__Latitude__anonymized) #
 table (data$s3q09__Longitude__anonymized)
 
 # Maps per variety
-# Read shapefile with sf (replaces readShapePoly and CRS)
 zones <- st_read("data/raw_data/Dashboard locations/Zones_Level_2.shp")
 
 data$subbinReferences <- as.character(data$subbinReferences)
